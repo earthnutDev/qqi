@@ -3,6 +3,8 @@ import { notSupport } from './notSupport';
 import { platform } from './platform';
 import { DevLogType, PrivateFunc } from './type';
 import { blankCall } from './blankCall';
+import { parseError } from './parseError';
+import { typeList } from './setType';
 
 /**  管理是否打印  */
 export function managePrint(
@@ -20,26 +22,33 @@ export function managePrint(
     if (type === false || isUndefined(dev) || dev === 'false') {
       return Reflect.apply(notSupport, privateFunc, []);
     }
+
+    if (typeList.includes(dev as DevLogType)) {
+      type = dev === 'true' ? 'all' : (dev as DevLogType);
+    }
+
     if (type === 'all' || type === 'info') {
       privateFunc.info = function (...str: unknown[]) {
-        try {
-          throw new Error();
-        } catch (error) {
-          console.log(error);
-        }
+        parseError(name, 'info');
         console.info(...str);
       };
     } else {
       privateFunc.info = blankCall;
     }
     if (type === 'all' || type === 'error') {
-      privateFunc.error = console.error;
+      privateFunc.error = function (...str: unknown[]) {
+        parseError(name, 'error');
+        console.error(...str);
+      };
     } else {
       privateFunc.error = blankCall;
     }
 
     if (type === 'all' || type === 'warn') {
-      privateFunc.warn = console.warn;
+      privateFunc.warn = function (...str: unknown[]) {
+        parseError(name, 'warn');
+        console.warn(...str);
+      };
     } else {
       privateFunc.warn = blankCall;
     }

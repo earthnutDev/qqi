@@ -21,6 +21,8 @@ dog(Dog.prototype);
 
 dog.error('dog error');
 
+dog.warn('i am warn');
+
 dog(dog.type);
 
 dog.type = false;
