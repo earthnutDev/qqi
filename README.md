@@ -15,7 +15,8 @@ npm install @qqi/dev-log --save
 ### 创建全局的 `dog` (dev log 的缩写，天才第一步，起名要认真) 对象
 
 ```ts
-export const dog = new Dog(process.env.NODE_ENV);
+/// 这里假设以 `a node tools` 为 `name` 的值
+export const dog = new Dog({ name: 'a node tools' });
 ```
 
 ### 在需要打印日志的地方引入 `dog` 对象
@@ -23,7 +24,14 @@ export const dog = new Dog(process.env.NODE_ENV);
 ```ts
 import { dog } from './dog';
 
-dog('你好'); //
+dog('你好'); // 该值是否打印还依赖于环境变量中有没有配置 `dev_log_dev` 的值
+```
+
+### 启用配置
+
+```bash
+# 配置 name 为 'a node tools'，则使用 `a_node_tools_dev` 或 `A_NODE_TOOLS_DEV` 来启动
+a_node_tools_dev=true npm run dev
 ```
 
 ## 文档地址

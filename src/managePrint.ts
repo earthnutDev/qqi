@@ -3,7 +3,10 @@ import { notSupport } from './notSupport';
 import { platform } from './platform';
 import { DevLogType, PrivateFunc } from './type';
 import { blankCall } from './blankCall';
-import { parseError } from './parseError';
+
+import { printError } from './printError';
+import { printWarn } from './printWarn';
+import { printInfo } from './printInfo';
 import { typeList } from './setType';
 
 /**  管理是否打印  */
@@ -22,37 +25,23 @@ export function managePrint(
     if (type === false || isUndefined(dev) || dev === 'false') {
       return Reflect.apply(notSupport, privateFunc, []);
     }
-
-    if (typeList.includes(dev as DevLogType)) {
+    /// 将显示配置环境变量的值给 type
+    if ([...typeList, 'true', 'false'].includes(dev)) {
       type = dev === 'true' ? 'all' : (dev as DevLogType);
     }
 
-    if (type === 'all' || type === 'info') {
-      privateFunc.info = function (...str: unknown[]) {
-        parseError(name, 'info');
-        console.info(...str);
-      };
-    } else {
-      privateFunc.info = blankCall;
-    }
-    if (type === 'all' || type === 'error') {
-      privateFunc.error = function (...str: unknown[]) {
-        parseError(name, 'error');
-        console.error(...str);
-      };
-    } else {
-      privateFunc.error = blankCall;
-    }
-
-    if (type === 'all' || type === 'warn') {
-      privateFunc.warn = function (...str: unknown[]) {
-        parseError(name, 'warn');
-        console.warn(...str);
-      };
-    } else {
-      privateFunc.warn = blankCall;
-    }
-  } else {
+    privateFunc.info = ['all', 'info', true].includes(type)
+      ? printInfo
+      : blankCall;
+    privateFunc.error = ['all', 'error', true].includes(type)
+      ? printError
+      : blankCall;
+    privateFunc.warn = ['all', 'warn', true].includes(type)
+      ? printWarn
+      : blankCall;
+  }
+  // //
+  else {
     Reflect.apply(notSupport, privateFunc, []);
   }
 }

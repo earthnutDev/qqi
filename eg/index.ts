@@ -4,7 +4,7 @@ import Dog from 'index';
 
 _p(pen('测试有我开始'));
 
-const dog = new Dog('all', 'dev log');
+const dog = new Dog({ type: 'all', name: 'dev log' });
 
 const cat = new Dog();
 

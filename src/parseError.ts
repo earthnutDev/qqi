@@ -6,7 +6,7 @@ import { DevLogType } from './type';
  * 解析 error
  *
  */
-export function parseError(name: string, type: DevLogType) {
+export function parseError(type: DevLogType) {
   try {
     throw new Error();
   } catch (error) {
@@ -32,7 +32,7 @@ export function parseError(name: string, type: DevLogType) {
       e => e.name !== '' && e.path !== undefined,
     )[3];
 
-    const startStr = ` ${type === 'info' ? '💡' : type === 'error' ? '❌' : '⚠️ '} ${new Date().toLocaleString()} ${name || ''} :`;
+    const startStr = ` ${type === 'info' ? '💡' : type === 'error' ? '❌' : '⚠️ '} ${new Date().toLocaleString()} `;
 
     const printStartPenStr = (
       type === 'info'

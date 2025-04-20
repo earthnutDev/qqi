@@ -1,5 +1,5 @@
 import { createConstructor, getRandomString } from 'a-js-tools';
-import { DevLog, DevLogType, PrivateFunc } from './type';
+import { DevLog, DevLogType, DogOptions, PrivateFunc } from './type';
 import { setType } from './setType';
 import { blankCall } from './blankCall';
 import { managePrint } from './managePrint';
@@ -9,15 +9,16 @@ import { isString } from 'a-type-of-js';
  *
  * 创建 dev log 工厂函数
  *
+ * @param options - 配置项
+ * @returns - dev log 工厂函数
+ *
+ *
  */
-function Dog(
-  this: DevLog,
-  type: DevLogType = false,
-  name: string = '',
-): DevLog {
+function Dog(this: DevLog, options?: DogOptions): DevLog {
+  const { name = '', type = false } = options || {};
   /**  名字  */
   const _name = isString(name)
-    ? name.trim().replace(/\s+/, '_')
+    ? name.trim().replace(/\s+/g, '_')
     : getRandomString(10);
   /**  私有属性  */
   let _type = setType(type);
@@ -73,6 +74,12 @@ function Dog(
 
 Dog.prototype.clear = () => console.clear();
 
+/**
+ *
+ * @param options 配置项
+ * @returns 函数对象
+ *
+ */
 const DogConstructor = createConstructor(Dog);
 
 export { DogConstructor as Dog };

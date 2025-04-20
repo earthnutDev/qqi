@@ -7,7 +7,5 @@ import { PrivateFunc } from './type';
  * 三个方法都是空方法
  */
 export function notSupport(this: PrivateFunc) {
-  this.error = blankCall;
-  this.info = blankCall;
-  this.warn = blankCall;
+  this.error = this.info = this.warn = blankCall;
 }

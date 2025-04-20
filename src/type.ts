@@ -22,3 +22,19 @@ export interface PrivateFunc {
   warn: (...str: unknown[]) => void;
   info: (...str: unknown[]) => void;
 }
+
+export type DogOptions = {
+  /**
+   * ### 类型
+   *
+   * 但是该值将被传入的系统参数覆盖
+   *
+   */
+  type?: DevLogType;
+  /**
+   * 该值将以 name_dev 的形式配置允许打印
+   *
+   *
+   */
+  name?: string;
+};
