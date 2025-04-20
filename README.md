@@ -28,4 +28,4 @@ dog('你好'); //
 
 ## 文档地址
 
-参看 [https://earthnut.dev/jja_dev-log/](https://earthnut.dev/jja_dev-log/)
+参看 [https://earthnut.dev/qqi_dev-log/](https://earthnut.dev/qqi_dev-log/)

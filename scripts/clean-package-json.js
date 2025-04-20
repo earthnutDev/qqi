@@ -34,15 +34,15 @@ packageJson = {
       },
     },
   },
-  keywords: ['jja', '@qqi/dev-log', '@qqi'],
-  homepage: 'https://earthnut.dev/jja_dev-log',
+  keywords: ['qqi', '@qqi/dev-log', '@qqi'],
+  homepage: 'https://earthnut.dev/qqi_dev-log',
   bugs: {
-    url: 'https://github.com/earthnutDev/jja_dev-log/issues',
+    url: 'https://github.com/earthnutDev/qqi_dev-log/issues',
     email: 'earthnut.dev@outlook.com',
   },
   repository: {
     type: 'git',
-    url: 'git+https://github.com/earthnutDev/jja_dev-log.git',
+    url: 'git+https://github.com/earthnutDev/qqi_dev-log.git',
   },
   publishConfig: {
     access: 'public',
