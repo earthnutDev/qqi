@@ -10,7 +10,7 @@
 npm install @qqi/dev-log --save
 ```
 
-## 使用
+## 使用 Dog
 
 ### 创建全局的 `dog` (dev log 的缩写，天才第一步，起名要认真) 对象
 
@@ -32,6 +32,67 @@ dog('你好'); // 该值是否打印还依赖于环境变量中有没有配置 `
 ```bash
 # 配置 name 为 'a node tools'，则使用 `a_node_tools_dev` 或 `A_NODE_TOOLS_DEV` 来启动
 a_node_tools_dev=true npm run dev
+```
+
+## 使用 dev
+
+在单元测试的时候使用 `jest` ，在功能测试时使用 `node:test` 和 `node:assert`。但是测试的时候，总是有打印的消息被 `node:test` 的结果覆盖。所以，写了一个简介的 dev ，用于功能测试。
+
+类似于 `node:test`，使用如下：
+
+```ts
+import { dev } from '@qqi/dev-log';
+
+const log = console.log;
+
+// 简单使用
+dev('测试 1', () => {
+  log(1);
+});
+
+// 我其实就是想能够跳过测试而不是每一次 ((skip)=>{ if(skip) return; ....})(false)
+dev.skip('跳过的测试', () => {
+  log('我并不会被打印出来');
+});
+
+// 子测试，每一个测试是独立的，类似于 jest，单独的测试模块出现 Error 将阻止剩余逻辑执行
+dev('包含子项的测试', it => {
+  it('子项 1️⃣', () => {
+    log('我要出错');
+    throw new Error('我粗错了');
+    log('完啦，我打印不出来了');
+  });
+
+  it('子项 2️⃣', () => {
+    log('没想到吧，我还活着');
+  });
+});
+
+// 可以异步执行
+dev('测试异步的代码', async it => {
+  it('测试异代码 2️⃣ ', async () => {
+    log('异步代码 2️⃣ 外部');
+    return new Promise(resolve => {
+      log('异步代码 2️⃣ 内部');
+      setTimeout(() => {
+        log('异步代码 2️⃣');
+        resolve('异步代码 2️⃣');
+      }, 500);
+    });
+  });
+
+  await it<string>('测试异代码 1️⃣ ', async () => {
+    log('异步代码 1️⃣ 外部');
+    return new Promise(resolve => {
+      log('异步代码 1️⃣ 内部');
+      setTimeout(() => {
+        log('异步代码 1️⃣');
+
+        resolve('异步代码 1️⃣');
+      }, 1000);
+    });
+  });
+});
 ```
 
 ## 文档地址

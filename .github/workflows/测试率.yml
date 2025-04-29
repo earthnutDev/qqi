@@ -2,7 +2,7 @@ name: 测试率自动化工具
 
 on:
   push:
-    branches: '*'
+    branches: [no-main]
   workflow_dispatch:
     inputs:
       version:
@@ -35,7 +35,7 @@ jobs:
       - name: 初始化 Node 并设定 Node 版本
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 22.x
 
       - name: 安装 dependencies 依赖
         run: npm install
