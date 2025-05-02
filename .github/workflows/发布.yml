@@ -57,36 +57,30 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: 安装 dependencies 依赖
-        run: |
-          npm ci
-
-      - name: 打包 check version
-        run: |
-          cd packages/check-version
-          npm ci
-          npm run build
+        run: npm ci
 
       - name: 检测变更的包信息
         id: changed_packages
         run: |
           check_version() {
            local NAME=$1
+           local ECHO_NAME="${1//-/_}" # 将 - 替换为 _
            local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/" && npx @qqi/check-version name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')
            if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
              echo '手动触发判断'   
              if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "${NAME}" ]; then
-                echo "${NAME}_changed=true" >> $GITHUB_OUTPUT
+                echo "${ECHO_NAME}_changed=true" >> $GITHUB_OUTPUT
                 return 0
               else
-                echo "${NAME}_changed=false" >> $GITHUB_OUTPUT
+                echo "${ECHO_NAME}_changed=false" >> $GITHUB_OUTPUT
                 return 0
              fi
            fi
 
            if [ "$CHANGED" != "false" ]; then
-              echo "${NAME}_changed=true" >> $GITHUB_OUTPUT
+              echo "${ECHO_NAME}_changed=true" >> $GITHUB_OUTPUT
            else 
-             echo "${NAME}_changed=false" >> $GITHUB_OUTPUT
+             echo "${ECHO_NAME}_changed=false" >> $GITHUB_OUTPUT
            fi
           }
 
@@ -109,7 +103,7 @@ jobs:
           ./packages/pub.sh core
 
       - name: 构建 dev log
-        if: steps.changed_packages.outputs.dev_log_changed == 'true'
+        if: steps.changed_packages.outputs.dev-log_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |

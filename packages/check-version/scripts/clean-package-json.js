@@ -39,6 +39,8 @@ packageJson = {
 };
 
 {
+  //  写入 package.json
+
   const distPath = getDirectoryBy('dist', 'directory');
 
   const distPackagePath = pathJoin(distPath, './dist/package.json');
