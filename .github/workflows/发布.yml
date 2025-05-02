@@ -73,9 +73,12 @@ jobs:
       - name: 检测变更的包信息
         id: changed_packages
         run: |
-          CHANGED_CORE=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/core/' && node ./packages/check-version/dist/bin.mjs name=core  && echo "true" || echo "false")
+          CHANGED_CORE=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/core/' && node ./packages/check-version/dist/bin.mjs name=core  && echo "true" || echo "false" | tr -d '\n')
           echo "初始化检测 CHANGED_CORE  $CHANGED_CORE"
-          if  [ "${ CHANGED_CORE }" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "调试信息:"
+          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
+          echo "事件类型: ${{ github.event_name }}"
+          if  [ "$CHANGED_CORE" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo '手动触发判断'   
             if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
               CHANGED_CORE="true"
@@ -84,9 +87,12 @@ jobs:
             fi
           fi
 
-          CHANGED_DEV_LOG=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/dev-log/' && node ./packages/check-version/dist/bin.mjs name=dev-log && echo "true" || echo "false")
+          CHANGED_DEV_LOG=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/dev-log/' && node ./packages/check-version/dist/bin.mjs name=dev-log && echo "true" || echo "false" | tr -d '\n')
           echo "初始化检测 CHANGED_DEV_LOG $CHANGED_DEV_LOG"
-          if  [ "${ CHANGED_DEV_LOG }" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "调试信息:"
+          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
+          echo "事件类型: ${{ github.event_name }}"
+          if  [ "$CHANGED_DEV_LOG" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo '手动触发判断'   
             if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "dev-log" ]; then
               CHANGED_DEV_LOG="true"
@@ -95,9 +101,12 @@ jobs:
             fi
           fi
 
-          CHANGED_CHECK_VERSION=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/check-version/' && node ./packages/check-version/dist/bin.mjs name=check-version && echo "true" || echo "false")
+          CHANGED_CHECK_VERSION=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/check-version/' && node ./packages/check-version/dist/bin.mjs name=check-version && echo "true" || echo "false" | tr -d '\n')
           echo "初始化检测 CHANGED_CHECK_VERSION $CHANGED_CHECK_VERSION"
-          if  [ "${ CHANGED_CHECK_VERSION }" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "调试信息:"
+          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
+          echo "事件类型: ${{ github.event_name }}"
+          if  [ "$CHANGED_CHECK_VERSION" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
               echo '手动触发判断'   
               if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "check-version" ]; then
               CHANGED_CHECK_VERSION="true"

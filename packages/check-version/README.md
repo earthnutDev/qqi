@@ -15,3 +15,10 @@ npm install --save @qqi/check-version
 ```bash
 npx @qqi/check-version name=[name]
 ```
+
+也可以传入 `cwd` 参数覆盖默认的判断文件夹，默认查找 'packages' 文件夹下子 npm 包，若您习惯于其他命名方式
+
+```bash
+# 倘若子主包 core 在 pkgs 文件夹下
+npx @qqi/.check-version name=core cwd=pkgs
+```
