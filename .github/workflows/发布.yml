@@ -66,8 +66,9 @@ jobs:
         id: changed_packages
         run: |
           check_version() {
-           local NAME=$1
-           local ECHO_NAME="${1//-/_}" # 将 - 替换为 _
+           local input="$1"
+           local NAME=$(echo "${input// /-}" | tr -s '-') # 替换空格为 - 并删除重复的字符
+           local ECHO_NAME=$(echo "${input// /_}" | tr -s '_') # 将空格替换为 _
            local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/" && npx @qqi/check-version name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')
            if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
              echo '手动触发判断'   
@@ -87,7 +88,8 @@ jobs:
            fi
           }
 
-          for arg in "core dev-log check-version copy-text" 
+          args=("core" "dev log" "check version" "copy text")
+          for arg in "${args[@]}" 
           do
             check_version $arg
           done
