@@ -35,3 +35,7 @@ npx @qqi/.check-version name=core cwd=pkgs skip
 
 npx @qqi/.check-version n=core c=pkgs s
 ```
+
+## 文档位置
+
+[@qqi/check-version](https://earthnut.dev/qqi/check-version)
