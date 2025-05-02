@@ -89,9 +89,8 @@ jobs:
           }
 
           args=("core" "dev log" "check version" "copy text")
-          for arg in "${args[@]}" 
-          do
-            check_version $arg
+          for arg in "${args[@]}"; do
+            check_version "$arg"
           done
 
       - name: 检测设定的值
@@ -99,6 +98,7 @@ jobs:
           echo "${{ steps.changed_packages.outputs.core_changed }}"
           echo "${{ steps.changed_packages.outputs.dev_log_changed }}"
           echo "${{ steps.changed_packages.outputs.check_version_changed }}"
+          echo "${{ steps.changed_packages.outputs.copy_text_changed }}"
           chmod +x ./scripts/pub.sh
 
       - name: 构建  core code
