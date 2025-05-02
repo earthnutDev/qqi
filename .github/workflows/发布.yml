@@ -96,14 +96,17 @@ jobs:
              return 1
            fi
           }
-          CORE_CHANGED=$(check_version core && echo 'true' ||  echo 'false')
+          check_version core
+          CORE_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "CORE_CHANGED 结果为 $CORE_CHANGED"
           echo "core_changed=$CORE_CHANGED" >> $GITHUB_OUTPUT
-          DEV_LOG_CHANGED=$(check_version dev-log && echo 'true' ||  echo 'false')
+          check_version dev-log
+          DEV_LOG_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "DEV_LOG_CHANGED 结果为 $DEV_LOG_CHANGED"
           echo "dev_log_changed=$DEV_LOG_CHANGED" >> $GITHUB_OUTPUT
           check_version check-version
-          CHECK_VERSION_CHANGED=$(check_version check-version && echo 'true' ||  echo 'false')
+          check_version check-version 
+          CHECK_VERSION_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "CHECK_VERSION_CHANGED 结果为 $CHECK_VERSION_CHANGED"
           echo "check_version_changed=$CHECK_VERSION_CHANGED" >> $GITHUB_OUTPUT
 
