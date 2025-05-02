@@ -74,24 +74,27 @@ jobs:
         id: changed_packages
         run: |
           CHANGED_CORE=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/core/' && node ./packages/check-version/dist/bin.mjs name=core  && echo "true" || echo "false")
+          echo "初始化检测 CHANGEd_CORE： $CHANGEd_CORE"
           if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo '手动触发判断'   
-              if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
-              CHANGED_CORE="true"
-              else
-              CHANGED_CORE="false"
-              fi
+          echo '手动触发判断'   
+          if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
+          CHANGED_CORE="true"
+          else
+          CHANGED_CORE="false"
+          fi
           fi
           CHANGED_DEV_LOG=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/dev-log/' && node ./packages/check-version/dist/bin.mjs name=dev-log && echo "true" || echo "false")
+          echo "初始化检测 CHANGED_DEV_LOG $CHANGED_DEV_LOG"
           if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo '手动触发判断'   
-              if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
-              CHANGED_DEV_LOG="dev-log"
-              else
-              CHANGED_DEV_LOG="false"
-              fi
+          echo '手动触发判断'   
+          if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
+          CHANGED_DEV_LOG="dev-log"
+          else
+          CHANGED_DEV_LOG="false"
+          fi
           fi
           CHANGED_CHECK_VERSION=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/check-version/' && node ./packages/check-version/dist/bin.mjs name=check-version && echo "true" || echo "false")
+          echo "初始化检测 CHANGED_CHECK_VERSION $CHANGED_CHECK_VERSION"
           if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
               echo '手动触发判断'   
               if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "check-version" ]; then
