@@ -1,7 +1,7 @@
 {
   "name": "@qqi/check-version",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "一个检测工作目录下 packages 文件夹下子 npm 包版本是否存在的模块",
   "scripts": {

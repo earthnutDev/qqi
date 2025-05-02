@@ -83,5 +83,4 @@ if (pkgInfo.data.time[fileContent.version]) {
 }
 
 _p(true, false);
-
 process.exit(0);
