@@ -73,66 +73,44 @@ jobs:
       - name: 检测变更的包信息
         id: changed_packages
         run: |
-          CHANGED_CORE=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/core/' && node ./packages/check-version/dist/bin.mjs name=core  && echo "true" || echo "false" | tr -d '\n')
-          echo "初始化检测 CHANGED_CORE  $CHANGED_CORE"
-          echo "调试信息:"
-          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
-          echo "事件类型: ${{ github.event_name }}"
-          if  [ "$CHANGED_CORE" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo '手动触发判断'   
-            if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
-              CHANGED_CORE="true"
-            else
-              CHANGED_CORE="false"
-            fi
-          fi
+          check_version() {
+           local NAME=$1
+           local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/${NAME}/' && node ./packages/check-version/dist/bin.mjs name=$NAME  && echo "true" || echo "false" | tr -d '\n')   
+           echo "初始化检测 CHANGED  $CHANGED"
+           echo "调试信息:"
+           echo "CHANGED=|${CHANGED}|"
+           echo "事件类型: ${{ github.event_name }}"
+           if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+             echo '手动触发判断'   
+             if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "${NAME}" ]; then
+               return 1
+             else
+               return 0
+             fi
+           fi
 
-          CHANGED_DEV_LOG=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/dev-log/' && node ./packages/check-version/dist/bin.mjs name=dev-log && echo "true" || echo "false" | tr -d '\n')
-          echo "初始化检测 CHANGED_DEV_LOG $CHANGED_DEV_LOG"
-          echo "调试信息:"
-          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
-          echo "事件类型: ${{ github.event_name }}"
-          if  [ "$CHANGED_DEV_LOG" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo '手动触发判断'   
-            if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "dev-log" ]; then
-              CHANGED_DEV_LOG="true"
-            else
-              CHANGED_DEV_LOG="false"
-            fi
-          fi
+           if [ "$CHANGED" != "false" ]; then
+             return 1
+           else 
+             return 0
+           fi
+          }
+          check_version core
+          echo "core_changed=$([ $? -eq 1 ] && echo 'true' ||  echo 'false')" >> $GITHUB_OUTPUT
+          check_version dev-log
+          echo "dev_log_changed=$([ $? -eq 1 ] && echo 'true' ||  echo 'false')" >> $GITHUB_OUTPUT
+          check_version check-version
+          echo "check_version_changed=$([ $? -eq 1 ] && echo 'true' ||  echo 'false')" >> $GITHUB_OUTPUT
 
-          CHANGED_CHECK_VERSION=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/check-version/' && node ./packages/check-version/dist/bin.mjs name=check-version && echo "true" || echo "false" | tr -d '\n')
-          echo "初始化检测 CHANGED_CHECK_VERSION $CHANGED_CHECK_VERSION"
-          echo "调试信息:"
-          echo "CHANGED_CHECK_VERSION=|${CHANGED_CHECK_VERSION}|"
-          echo "事件类型: ${{ github.event_name }}"
-          if  [ "$CHANGED_CHECK_VERSION" = "true" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-              echo '手动触发判断'   
-              if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "check-version" ]; then
-              CHANGED_CHECK_VERSION="true"
-              else
-              CHANGED_CHECK_VERSION="false"
-              fi
-          fi
-          echo "core_changed=${CHANGED_CORE}" >> $GITHUB_OUTPUT
-          echo "dev_log_changed=${CHANGED_DEV_LOG}" >> $GITHUB_OUTPUT
-          echo "check_version_changed=${CHANGED_CHECK_VERSION}" >> $GITHUB_OUTPUT
-          echo "CHANGED_CORE: ${CHANGED_CORE}"
-          echo "CHANGED_DEV_LOG: ${CHANGED_DEV_LOG}"
-          echo "CHANGED_CHECK_VERSION: ${CHANGED_CHECK_VERSION}"
-          exit 1;
-
-      - name: 构建
+      - name: 构建 code
         if: steps.changed_packages.outputs.core_changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
+          cd packages/core
           npm run build
-
-      - name: 获取版本号并解析 tag
-        id: extract-version
-        run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "获取全称 npm version : $VERSION"
-
           if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
             TAG=${BASH_REMATCH[1]}
             echo "捕获到 npm tag : $TAG"
@@ -140,12 +118,61 @@ jobs:
             TAG="latest"
             echo "未捕获到 npm tag 设置了默认 : $TAG"
           fi
-
-          echo "tag=${TAG}" >> $GITHUB_ENV # 输出 tag
-
-      - name: 发布到 npm
+          cd dist
+          npm publish --provenance --access public --tag ${TAG}
+      - name: 构建 code
+        if: steps.changed_packages.outputs.core_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
+          cd packages/core
+          npm run build
+          VERSION=$(node -p "require('./package.json').version")
+          echo "获取全称 npm version : $VERSION"
+          if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
+            TAG=${BASH_REMATCH[1]}
+            echo "捕获到 npm tag : $TAG"
+          else
+            TAG="latest"
+            echo "未捕获到 npm tag 设置了默认 : $TAG"
+          fi
           cd dist
-          npm publish --provenance --access public --tag ${{ env.tag }}
+          npm publish --provenance --access public --tag ${TAG}
+
+      - name: 构建 dev log
+        if: steps.changed_packages.outputs.dev_log_changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          cd packages/dev-log
+          npm run build
+          VERSION=$(node -p "require('./package.json').version")
+          echo "获取全称 npm version : $VERSION"
+          if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
+            TAG=${BASH_REMATCH[1]}
+            echo "捕获到 npm tag : $TAG"
+          else
+            TAG="latest"
+            echo "未捕获到 npm tag 设置了默认 : $TAG"
+          fi
+          cd dist
+          npm publish --provenance --access public --tag ${TAG}
+
+      - name: 构建 check version
+        if: steps.changed_packages.outputs.check_version_changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          cd packages/check-version
+          npm run build
+          VERSION=$(node -p "require('./package.json').version")
+          echo "获取全称 npm version : $VERSION"
+          if [[ $VERSION =~ -([a-zA-Z0-9]+)(\.|$) ]]; then
+            TAG=${BASH_REMATCH[1]}
+            echo "捕获到 npm tag : $TAG"
+          else
+            TAG="latest"
+            echo "未捕获到 npm tag 设置了默认 : $TAG"
+          fi
+          cd dist
+          npm publish --provenance --access public --tag ${TAG}

@@ -14,6 +14,8 @@ npm install --save @qqi/check-version
 
 ```bash
 npx @qqi/check-version name=[name]
+
+npx @qqi/check-version n=[name]
 ```
 
 也可以传入 `cwd` 参数覆盖默认的判断文件夹，默认查找 'packages' 文件夹下子 npm 包，若您习惯于其他命名方式
@@ -21,4 +23,15 @@ npx @qqi/check-version name=[name]
 ```bash
 # 倘若子主包 core 在 pkgs 文件夹下
 npx @qqi/.check-version name=core cwd=pkgs
+
+npx @qqi/.check-version n=core c=pkgs
+```
+
+使用 skip 参数是否跳过执行线上版本检测（因为 '0.0.0' 的版本默认为跳过检测，若初始版本非 '0.0.0' 时 ，也可以使用该参数跳过检测）
+
+```bash
+# 倘若子主包 core 在 pkgs 文件夹下
+npx @qqi/.check-version name=core cwd=pkgs skip
+
+npx @qqi/.check-version n=core c=pkgs s
 ```
