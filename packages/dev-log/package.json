@@ -1,0 +1,31 @@
+{
+  "name": "@qqi/dev-log",
+  "type": "module",
+  "version": "0.2.0",
+  "private": true,
+  "description": "在 dev 环境使用 name_dev 启动日志打印",
+  "scripts": {
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "build": "jja rm dist && npm run b && npm run clean:package",
+    "clean:package": "node scripts/clean-package-json.js",
+    "diff": "jja pkg --diff",
+    "eslint": "jja cls && eslint src",
+    "dev": "jja rm .eg && rollup --config rollup.dev.config.js && node .eg/index.mjs",
+    "beautify": "npm run prettier",
+    "prettier": "jja cls && prettier . --write",
+    "test": "jja cls && lint-staged && jest --coverage",
+    "report": "cat ./coverage/lcov.info | coveralls",
+    "coverage": "codecov",
+    "push:version": "gvv",
+    "push:submit": "gvv",
+    "vjj": "vjj",
+    "prepublishOnly": "pjj",
+    "prepare": "husky"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "a-js-tools": ">=0.6.0 <1.0.0",
+    "a-type-of-js": ">=0.2.0 <1.0.0",
+    "color-pen": ">=1.3.2 <2.0.0."
+  }
+}

@@ -1,4 +1,4 @@
-import { dev } from './../index';
+import { dev } from '../packages/dev-log/index';
 import { _p } from 'a-node-tools';
 import { pen } from 'color-pen';
 import Dog from 'index';

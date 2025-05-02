@@ -1,7 +1,11 @@
 name: 发布到 npm
 on:
   push:
-    branches: [main]
+    branches: '*'
+    paths:
+      - 'packages/core/**' # 主包
+      - 'packages/dev-log/**' # 日志包
+
   workflow_dispatch: # 手动触发
     inputs:
       version:
@@ -14,6 +18,15 @@ on:
         required: false
         default: ''
         type: string
+      package:
+        description: '要发布的包'
+        required: true
+        type: choice
+        options:
+          - core
+          - dev-log
+          - check-version
+          - all
 
 jobs:
   pub:
@@ -50,7 +63,52 @@ jobs:
         run: |
           npm ci
 
+      - name: 打包 check version
+        run: |
+          cd packages/check-version
+          npm ci
+          npm run build
+
+      - name: 检测变更的包信息
+        id: changed_packages
+        run: |
+          CHANGED_CORE=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/core/' && node ./packages/check-version/dist/bin.mjs name=core  && echo "true" || echo "false")
+          if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+              echo '手动触发判断'   
+              if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
+              CHANGED_CORE="true"
+              else
+              CHANGED_CORE="false"
+              fi
+          fi
+          CHANGED_DEV_LOG=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/dev-log/' && node ./packages/check-version/dist/bin.mjs name=dev-log && echo "true" || echo "false")
+          if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+              echo '手动触发判断'   
+              if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "core" ]; then
+              CHANGED_DEV_LOG="dev-log"
+              else
+              CHANGED_DEV_LOG="false"
+              fi
+          fi
+          CHANGED_CHECK_VERSION=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/check-version/' && node ./packages/check-version/dist/bin.mjs name=check-version && echo "true" || echo "false")
+          if  [ "$CHANGEd_CORE" = "true" ] && [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+              echo '手动触发判断'   
+              if [ "${{ github.event.inputs.package}}" = "all" ] || [ "${{ github.event.inputs.package }}" = "check-version" ]; then
+              CHANGED_CHECK_VERSION="dev-log"
+              else
+              CHANGED_CHECK_VERSION="false"
+              fi
+          fi
+          echo "core_changed=${CHANGED_CORE}" >> $GITHUB_OUTPUT
+          echo "dev_log_changed=${CHANGED_DEV_LOG}" >> $GITHUB_OUTPUT
+          echo "check_version_changed=${CHANGED_CHECK_VERSION}" >> $GITHUB_OUTPUT
+          echo "CHANGED_CORE: ${CHANGED_CORE}"
+          echo "CHANGED_DEV_LOG: ${CHANGED_DEV_LOG}"
+          echo "CHANGED_CHECK_VERSION: ${CHANGED_CHECK_VERSION}"
+          exit 1;
+
       - name: 构建
+        if: steps.changed_packages.outputs.core_changed == 'true'
         run: |
           npm run build
 
