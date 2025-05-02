@@ -5,6 +5,7 @@ on:
     paths:
       - 'packages/core/**' # 主包
       - 'packages/dev-log/**' # 日志包
+      - 'packages/check-version/**' # 版本检测包
 
   workflow_dispatch: # 手动触发
     inputs:
