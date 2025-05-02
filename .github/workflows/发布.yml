@@ -96,18 +96,22 @@ jobs:
              return 1
            fi
           }
-          check_version core ||  echo 1
-           CORE_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
-          echo "CORE_CHANGED 结果为 $CORE_CHANGED"
-          echo "core_changed=$CORE_CHANGED" >> $GITHUB_OUTPUT
-          check_version dev-log ||  echo 1
-          DEV_LOG_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
-          echo "DEV_LOG_CHANGED 结果为 $DEV_LOG_CHANGED"
-          echo "dev_log_changed=$DEV_LOG_CHANGED" >> $GITHUB_OUTPUT
-          check_version check-version ||  echo 1
-          CHECK_VERSION_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
-          echo "CHECK_VERSION_CHANGED 结果为 $CHECK_VERSION_CHANGED"
-          echo "check_version_changed=$CHECK_VERSION_CHANGED" >> $GITHUB_OUTPUT
+
+          if ! check_version core; then
+             echo "core_changed=false" >> $GITHUB_OUTPUT
+          else 
+             echo "core_changed=true" >> $GITHUB_OUTPUT
+          fi
+          if ! check_version check-version; then
+             echo "check_version_changed=false" >> $GITHUB_OUTPUT
+          else 
+             echo "check_version_changed=true" >> $GITHUB_OUTPUT
+          fi
+          if ! check_version dev-log; then
+             echo "dev_log_changed=false" >> $GITHUB_OUTPUT
+          else 
+             echo "dev_log_changed=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: 构建  core code
         if: steps.changed_packages.outputs.core_changed == 'true'
