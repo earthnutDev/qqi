@@ -7,3 +7,5 @@
 ```bash
 npm install --save @qqi/check-version
 ```
+
+## 使用

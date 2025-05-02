@@ -70,6 +70,9 @@ const pkgInfo = await getNpmPkgInfo(fileContent.name);
 
 // 包数据未找到或是版本号已存在则返回
 if (isNull(pkgInfo.data)) {
+  if (pkgInfo.success && pkgInfo.status !== 'parseJsonError') {
+  }
+
   _p(`${fileContent.name} 包未找到`);
   process.exit(1);
 }

@@ -16,7 +16,7 @@
   "dependencies": {
     "a-command": ">=2.1.7 <3.0.0",
     "a-js-tools": ">=0.6.1 <1.0.0",
-    "a-node-tools": ">=3.0.0 <4.0.0",
+    "a-node-tools": ">=3.0.1 <4.0.0",
     "a-type-of-js": ">=0.2.0 <1.0.0"
   }
 }
