@@ -1,0 +1,20 @@
+{
+  "name": "@qqi/copy-text",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "node 环境文本赋值到剪切板 📋",
+  "scripts": {
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "clean:package-json": "node ./scripts/clean-package-json.js",
+    "build": "jja rm dist && npm run b && npm run clean:package-json",
+    "diff": "jja pkg --diff",
+    "eslint": "jja cls && eslint src",
+    "beautify": "npm run prettier",
+    "prettier": "jja cls && prettier . --write",
+    "test": "jja cls && rollup --config rollup.config.test.js && node test/out/test/index.mjs"
+  },
+  "dependencies": {
+    "a-js-tools": ">=0.6.1 <1.0.0",
+    "a-node-tools": ">=3.0.1 <4.0.0"
+  }
+}

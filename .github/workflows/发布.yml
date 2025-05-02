@@ -6,6 +6,7 @@ on:
       - 'packages/core/**' # 主包
       - 'packages/dev-log/**' # 日志包
       - 'packages/check-version/**' # 版本检测包
+      - 'packages/copy-text/**' # 复制文本到剪切板的包
       - 'package.json' # 全局的依赖信息
 
   workflow_dispatch: # 手动触发
@@ -24,6 +25,7 @@ on:
           - core
           - dev-log
           - check-version
+          - copy-text
         default: 'all'
 
 jobs:
@@ -85,9 +87,10 @@ jobs:
            fi
           }
 
-          check_version core
-          check_version dev-log
-          check_version check-version
+          for arg in "core dev-log check-version copy-text" 
+          do
+            check_version $arg
+          done
 
       - name: 检测设定的值
         run: |
@@ -116,3 +119,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
           ./scripts/pub.sh check-version
+
+      - name: 构建 copy text
+        if: steps.changed_packages.outputs.copy_text_changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          ./scripts/pub.sh copy-text
