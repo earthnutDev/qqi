@@ -20,10 +20,11 @@ on:
         required: true
         type: choice
         options:
+          - all
           - core
           - dev-log
           - check-version
-          - all
+        default: 'all'
 
 jobs:
   pub:
