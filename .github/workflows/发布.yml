@@ -75,34 +75,35 @@ jobs:
         run: |
           check_version() {
            local NAME=$1
-           local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q '^packages/${NAME}/' && node ./packages/check-version/dist/bin.mjs name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')   
+           local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/" && node ./packages/check-version/dist/bin.mjs name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')   
            echo "初始化检测 CHANGED  $CHANGED"
            echo "调试信息:"
            echo "CHANGED=|${CHANGED}|"
            echo "事件类型: ${{ github.event_name }}"
+
            if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
              echo '手动触发判断'   
              if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "${NAME}" ]; then
-               return 1
-             else
                return 0
+             else
+               return 1
              fi
            fi
 
            if [ "$CHANGED" != "false" ]; then
-             return 1
-           else 
              return 0
+           else 
+             return 1
            fi
           }
           check_version core
-          CORE_CHANGED=$([ "$?" -eq "1" ] && echo 'true' ||  echo 'false')
+          CORE_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "core_changed=$CORE_CHANGED" >> $GITHUB_OUTPUT
           check_version dev-log
-          DEV_LOG_CHANGED=$([ "$?" -eq "1" ] && echo 'true' ||  echo 'false')
+          DEV_LOG_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "dev_log_changed=$DEV_LOG_CHANGED" >> $GITHUB_OUTPUT
           check_version check-version
-          CHECK_VERSION_CHANGED=$([ "$?" -eq "1" ] && echo 'true' ||  echo 'false')
+          CHECK_VERSION_CHANGED=$([ "$?" -eq "0" ] && echo 'true' ||  echo 'false')
           echo "check_version_changed=$CHECK_VERSION_CHANGED" >> $GITHUB_OUTPUT
 
       - name: 构建  core code
