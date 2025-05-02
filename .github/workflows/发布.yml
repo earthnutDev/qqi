@@ -100,18 +100,18 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
-          ./packages/pub.sh core
+          ./scripts/pub.sh core
 
       - name: 构建 dev log
         if: steps.changed_packages.outputs.dev-log_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
-          ./packages/pub.sh dev-log
+          ./scripts/pub.sh dev-log
 
       - name: 构建 check version
         if: steps.changed_packages.outputs.check_version_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
-          ./packages/pub.sh check-version
+          ./scripts/pub.sh check-version
