@@ -9,3 +9,7 @@ npm install --save @qqi/check-version
 ```
 
 ## 使用
+
+```bash
+npx @qqi/check-version name=[name]
+```
