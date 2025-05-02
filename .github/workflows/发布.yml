@@ -78,7 +78,7 @@ jobs:
            local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/" && node ./packages/check-version/dist/bin.mjs name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')   
            echo "初始化检测 CHANGED  $CHANGED"
            echo "调试信息:"
-           echo "CHANGED=|${CHANGED}|"
+           echo "${NAME}=|${CHANGED}|"
            echo "事件类型: ${{ github.event_name }}"
 
            if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -97,14 +97,14 @@ jobs:
            fi
           }
           CORE_CHANGED=$(check_version core && echo 'true' ||  echo 'false')
-          echo "CORE_CHANGED $CORE_CHANGED"
+          echo "CORE_CHANGED 结果为 $CORE_CHANGED"
           echo "core_changed=$CORE_CHANGED" >> $GITHUB_OUTPUT
           DEV_LOG_CHANGED=$(check_version dev-log && echo 'true' ||  echo 'false')
-          echo "DEV_LOG_CHANGED $DEV_LOG_CHANGED"
+          echo "DEV_LOG_CHANGED 结果为 $DEV_LOG_CHANGED"
           echo "dev_log_changed=$DEV_LOG_CHANGED" >> $GITHUB_OUTPUT
           check_version check-version
           CHECK_VERSION_CHANGED=$(check_version check-version && echo 'true' ||  echo 'false')
-          echo "CHECK_VERSION_CHANGED $CHECK_VERSION_CHANGED"
+          echo "CHECK_VERSION_CHANGED 结果为 $CHECK_VERSION_CHANGED"
           echo "check_version_changed=$CHECK_VERSION_CHANGED" >> $GITHUB_OUTPUT
 
       - name: 构建  core code

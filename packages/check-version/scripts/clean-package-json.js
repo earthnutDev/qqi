@@ -12,12 +12,12 @@ let packageJson = readFileToJsonSync('./package.json');
 );
 
 packageJson = {
+  ...packageJson,
   author: {
     name: 'earthnut',
     email: 'earthnut.dev@outlook.com',
     url: 'https://earthnut.dev',
   },
-  ...packageJson,
   files: ['bin.mjs'],
   keywords: ['qqi', '@qqi/check-version', '@qqi'],
   homepage: 'https://earthnut.dev/qqi',
