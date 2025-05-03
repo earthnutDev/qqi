@@ -35,14 +35,14 @@ packageJson = {
     },
   },
   keywords: ['qqi', '@qqi/dev-log', '@qqi'],
-  homepage: 'https://earthnut.dev/qqi_dev-log',
+  homepage: 'https://earthnut.dev/qqi/dev-log',
   bugs: {
-    url: 'https://github.com/earthnutDev/qqi_dev-log/issues',
+    url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',
   },
   repository: {
     type: 'git',
-    url: 'git+https://github.com/earthnutDev/qqi_dev-log.git',
+    url: 'git+https://github.com/earthnutDev/qqi.git',
   },
   publishConfig: {
     access: 'public',

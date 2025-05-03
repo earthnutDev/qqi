@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
+import { external } from '@qqi/rollup-external';
 
 export default {
   input: './index.ts',
@@ -27,10 +28,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: id =>
-    /^(node:)|^(tslib)|^(a-js-tools)|^(a-node-tools)|^(a-type-of-js)|^(color-pen)/.test(
-      id,
-    ),
+  external: external({
+    exclude: ['a-', 'color-pen'],
+  }),
   plugins: [
     resolve(),
     commonjs(),
