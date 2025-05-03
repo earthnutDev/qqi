@@ -7,6 +7,7 @@ on:
       - 'packages/dev-log/**' # 日志包
       - 'packages/check-version/**' # 版本检测包
       - 'packages/copy-text/**' # 复制文本到剪切板的包
+      - 'packages/rollup-external/**' # 用于 rollup 打包排除依赖的函数
       - 'package.json' # 全局的依赖信息
 
   workflow_dispatch: # 手动触发
@@ -26,6 +27,7 @@ on:
           - dev-log
           - check-version
           - copy-text
+          - rollup-external
         default: 'all'
 
 jobs:
@@ -88,7 +90,7 @@ jobs:
            fi
           }
 
-          args=("core" "dev log" "check version" "copy text")
+          args=("core" "dev log" "check version" "copy text" "rollup external")
           for arg in "${args[@]}"; do
             check_version "$arg"
           done
@@ -128,3 +130,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
           ./scripts/pub.sh copy-text
+
+      - name: 构建 copy text
+        if: steps.changed_packages.outputs.rollup_external_changed == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          ./scripts/pub.sh rollup-external
