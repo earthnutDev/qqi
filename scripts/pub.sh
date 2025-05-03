@@ -15,5 +15,10 @@ else
   TAG="latest"
   echo "未捕获到 npm tag 设置了默认 : $TAG"
 fi
-cd dist
-npm publish --provenance --access public --tag ${TAG}
+
+if cd dist; then 
+  echo "开始发布 npm 包"
+  npm publish --provenance --access public --tag ${TAG}
+else
+  echo "未找到 dist 构建码"
+fi

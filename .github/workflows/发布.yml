@@ -71,7 +71,11 @@ jobs:
            local input="$1"
            local NAME=$(echo "${input// /-}" | tr -s '-') # 替换空格为 - 并删除重复的字符
            local ECHO_NAME=$(echo "${input// /_}" | tr -s '_') # 将空格替换为 _
+           echo "输入：${input}"
+           echo "使用：${NAME}"
+           echo "输出：${ECHO_NAME}"
            local CHANGED=$(git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/" && npx @qqi/check-version name=$NAME  && echo 'true' || echo 'false' | tr -d '\n')
+           echo "${input} 输出: ${CHANGED}"
            if  [ "$CHANGED" != "false" ] && [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
              echo '手动触发判断'   
              if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "${NAME}" ]; then
@@ -101,6 +105,7 @@ jobs:
           echo "${{ steps.changed_packages.outputs.dev_log_changed }}"
           echo "${{ steps.changed_packages.outputs.check_version_changed }}"
           echo "${{ steps.changed_packages.outputs.copy_text_changed }}"
+          echo "${{ steps.changed_packages.outputs.rollup_external_changed }}"
           chmod +x ./scripts/pub.sh
 
       - name: 构建  core code
@@ -131,7 +136,7 @@ jobs:
         run: |
           ./scripts/pub.sh copy-text
 
-      - name: 构建 copy text
+      - name: 构建 rollup external
         if: steps.changed_packages.outputs.rollup_external_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
