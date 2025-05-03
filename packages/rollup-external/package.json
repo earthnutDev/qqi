@@ -1,7 +1,7 @@
 {
   "name": "@qqi/rollup-external",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "用于 rollup 打包 📦 时排除异己的工具 🔧",
   "license": "ISC",
   "scripts": {

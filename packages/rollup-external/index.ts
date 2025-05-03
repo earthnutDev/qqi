@@ -1,5 +1,6 @@
 import { isArray, isNull, isUndefined } from 'a-type-of-js';
 import {
+  _p,
   getDirectoryBy,
   PackageJson,
   pathJoin,
@@ -12,11 +13,7 @@ import { pen } from 'color-pen';
  * 依赖配置
  *
  */
-export function external({
-  exclude,
-  ignore,
-  include,
-}: {
+export function external(options?: {
   /**  排除且在依赖项中的包  */
   exclude?: string[];
   /**  在排除的包却不需要在 dependencies  中的包，如： node:stream 等  */
@@ -24,6 +21,8 @@ export function external({
   /**  包含的包（想打包入结果的包）  */
   include?: string[];
 }) {
+  const { exclude, ignore, include } = options || {};
+
   const packageDir = getDirectoryBy('package.json', 'file');
 
   if (isUndefined(packageDir)) {
@@ -67,16 +66,16 @@ export function external({
         dependencies.includes(id) === false &&
         ignorePkg.every(e => !id.startsWith(e))
       ) {
-        throw new RangeError(
+        _p(
           `${pen.bgRed.blink.bold.yellow(id)} 依赖被排除打包却未再 package.json 中配置`,
         );
+        process.exit(1);
       }
     } else {
       // 包不存在于配置中，但是却是非本地包
       if (/^[^./]/g.test(id)) {
-        throw new RangeError(
-          `${pen.bgRed.blink.bold.yellow(id)} 依赖未被排除，打包关闭`,
-        );
+        _p(`${pen.bgRed.blink.bold.yellow(id)} 依赖未被排除，打包关闭`);
+        process.exit(1);
       }
     }
     return result;

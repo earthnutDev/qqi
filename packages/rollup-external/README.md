@@ -37,6 +37,7 @@ export default {
 - 默认读取 `package.json` 中的 `dependencies` 和 `peerDependencies` 的依赖项作为 `exclude` 的值，即改值一般无需配置
 - `include` 使用的全量对比，且优先级要远远高于 `exclude` 和 `ignore` 的配置，若在 `dependencies` 中配置了某依赖却又想将该依赖包含在打包文件内时可使用 `include`（但是需注意包会包含于 'node_modules' 文件夹下，保证 files 字段包含该项）
 - `ignore` 用于忽略那些不包含于 'package.json' 的 `dependencies` 中却需要被排除的依赖，如 `node:`、`src/` 等路径的依赖。校验时以输入的字符串的 `startWith` 判断
+- 可直接不使用参数，如果仅是想排除 'package.json' 文件中 `dependencies` 配置依赖 （怎么感觉有一股翻译腔）
 
 ## 文档地址
 
