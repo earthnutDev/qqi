@@ -4,7 +4,12 @@ cd "packages/$1"
 
 npm ci
 
-npm run build || echo "构建失败" && exit 1
+if npm run build; then 
+  echo "构建成功"
+else
+  echo "构建失败" 
+  exit 1
+fi
 
 VERSION=$(node -p "require('./package.json').version")
 

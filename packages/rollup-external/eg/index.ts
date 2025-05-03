@@ -1,6 +1,6 @@
 import { external } from '../index';
 
 external({
-  exclude: ['node:', 'a-node-tools'],
-  ignore: ['node:'],
-})('node:fs');
+  ignore: ['node:fs'],
+  include: ['node:'],
+})('node:f');
