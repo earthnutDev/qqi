@@ -32,3 +32,4 @@ if ! npm publish --provenance --access public --tag ${TAG} ; then
     exit 1
 fi
 
+echo "🚀🚀  发布成功，完结 🎉🎉 撒花 🎉🎉"

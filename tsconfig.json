@@ -4,7 +4,12 @@
     "packages/dev-log/index.ts",
     "src/**/*.ts",
     "**.d.ts",
-    "eg/**/*.ts"
+    "packages/dev-log/eg/**/*.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "./eg/index.mjs"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "packages/dev-log/eg/index.mjs"
+  ]
 }
