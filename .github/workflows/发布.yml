@@ -115,11 +115,11 @@ jobs:
 
       - name: 检测设定的值
         run: |
-          echo "${{ steps.changed_packages.outputs.core_changed }}"
-          echo "${{ steps.changed_packages.outputs.dev_log_changed }}"
-          echo "${{ steps.changed_packages.outputs.check_version_changed }}"
-          echo "${{ steps.changed_packages.outputs.copy_text_changed }}"
-          echo "${{ steps.changed_packages.outputs.rollup_external_changed }}"
+          echo "核心包 ${{ steps.changed_packages.outputs.core_changed }}"
+          echo "dev 包 ${{ steps.changed_packages.outputs.dev_log_changed }}"
+          echo "版本检测包 ${{ steps.changed_packages.outputs.check_version_changed }}"
+          echo "复制文本包 ${{ steps.changed_packages.outputs.copy_text_changed }}"
+          echo "rollup 打包依赖排除包 ${{ steps.changed_packages.outputs.rollup_external_changed }}"
           chmod +x ./scripts/pub.sh
 
       - name: 构建  core code
@@ -130,7 +130,7 @@ jobs:
           ./scripts/pub.sh core
 
       - name: 构建 dev log
-        if: steps.changed_packages.outputs.dev-log_changed == 'true'
+        if: steps.changed_packages.outputs.dev_log_changed == 'true'
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         run: |
