@@ -45,6 +45,14 @@ import { dev } from '@qqi/dev-log';
 
 const log = console.log;
 
+dev.beforeEach(() => {
+  console.log('你们执行前需要先执行我');
+});
+
+dev.afterEach(() => {
+  console.log('你们执行完后会执行我');
+});
+
 // 简单使用
 dev('测试 1', () => {
   log(1);
@@ -57,6 +65,25 @@ dev.skip('跳过的测试', () => {
 
 // 子测试，每一个测试是独立的，类似于 jest，单独的测试模块出现 Error 将阻止剩余逻辑执行
 dev('包含子项的测试', it => {
+  it.before(() => {
+    console.log('我是大哥，我先执行，且仅执行一次');
+  });
+  it.before(() => {
+    console.log('我是二哥，我执行次于大哥，且仅执行一次');
+  });
+
+  it.after(() => {
+    console.log('我是小弟，你们执行完再执行我就行，仅执行一次');
+  });
+
+  it.beforeEach(() => {
+    console.log('我是三哥，我执行次于二哥，每次子项执行我都执行一次');
+  });
+
+  it.beforeEach(() => {
+    console.log('我是二弟，我执行早于小弟，每次子项执行我都执行一次');
+  });
+
   it('子项 1️⃣', () => {
     log('我要出错');
     throw new Error('我粗错了');

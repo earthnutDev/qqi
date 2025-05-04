@@ -1,7 +1,7 @@
 {
   "name": "@qqi/dev-log",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "在 dev 环境使用 name_dev 启动日志打印",
   "scripts": {

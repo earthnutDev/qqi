@@ -7,7 +7,6 @@ import {
   OriginDevTool,
 } from './types';
 import { csi } from '../csi';
-import pen from 'color-pen';
 import { isAsyncFunction, isFunction, isGeneratorFunction } from 'a-type-of-js';
 
 /**
@@ -42,8 +41,6 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
         console.log(`⎆ %c跳过执行 ${message}`, 'color: #666;');
       return;
     }
-    console.log(pen.red(message), '*********');
-
     // try {
     //   // 执行父级执行前
     //   await executivePlant(options?.before);
