@@ -32,12 +32,14 @@ export default {
     exclude: ['a-', 'color-pen'],
   }),
   plugins: [
+    typescript({
+      target: 'es2017',
+      module: 'system',
+      tsconfig: './tsconfig.rollup.json',
+    }),
     resolve(),
     commonjs(),
     json(),
-    typescript({
-      tsconfig: './tsconfig.rollup.json',
-    }),
     cleanup(),
     copy({
       targets: [

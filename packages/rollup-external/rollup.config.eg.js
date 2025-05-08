@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
-import copy from 'rollup-plugin-copy';
 
 export default {
   input: './eg/index.ts',
@@ -26,11 +25,5 @@ export default {
       tsconfig: './tsconfig.rollup.json',
     }),
     cleanup(),
-    copy({
-      targets: [
-        { src: 'README.md', dest: 'dist' },
-        { src: 'LICENSE', dest: 'dist' },
-      ],
-    }),
   ],
 };

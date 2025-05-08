@@ -3,11 +3,7 @@ on:
   push:
     branches: '*'
     paths:
-      - 'packages/core/**' # 主包
-      - 'packages/dev-log/**' # 日志包
-      - 'packages/check-version/**' # 版本检测包
-      - 'packages/copy-text/**' # 复制文本到剪切板的包
-      - 'packages/rollup-external/**' # 用于 rollup 打包排除依赖的函数
+      - 'packages/**' # 检测任意文件变化，
       - 'package.json' # 全局的依赖信息
 
   workflow_dispatch: # 手动触发
@@ -22,12 +18,12 @@ on:
         required: true
         type: choice
         options:
-          - all
           - core
           - dev-log
           - check-version
           - copy-text
           - rollup-external
+          - all
         default: 'all'
 
 jobs:
@@ -48,12 +44,13 @@ jobs:
     if: |
       (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'version')) ||
       github.event_name == 'workflow_dispatch'
+
     steps:
       - name: 代码检出
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.ref || github.ref_name }}
-          fetch-depth: 3
+          fetch-depth: 0
 
       - name: 初始化 Node 并设定 Node 版本
         uses: actions/setup-node@v4
@@ -62,97 +59,33 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: 安装 dependencies 依赖
-        run: npm ci
-
-      - name: 检测变更的包信息
-        id: changed_packages
         run: |
-          check_version() {
-           local input="$1"
-           local NAME=$(echo "${input// /-}" | tr -s '-') # 替换空格为 - 并删除重复的字符
-           local ECHO_NAME=$(echo "${input// /_}" | tr -s '_') # 将空格替换为 _
-           echo "输入：${input}"
-           echo "使用：${NAME}"
-           echo "输出：${ECHO_NAME}"
+          npm ci
+          cd scripts
+          chmod +x detect_changes.sh workflow_dispatch.sh pub.sh
 
-           if git diff --name-only HEAD^ HEAD | grep -q "^packages/${NAME}/"; then
-             echo "有变更"
-           else
-             echo "无变更"
-             echo "${ECHO_NAME}_changed=false" >> $GITHUB_OUTPUT
-             return 0
-           fi
-           echo "开始校验是否通过包版本审视"
-           if npx @qqi/check-version name=$NAME; then
-             echo "\n校验通过 ${NAME}"
-           else
-             echo "\n校验未通过 ${NAME}"
-             echo "${ECHO_NAME}_changed=false" >> $GITHUB_OUTPUT
-             return 0
-           fi
-           echo "开始校验是否手动触发"
-           if  [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-             echo '手动触发判断'   
-             if [ "${{ github.event.inputs.package }}" = "all" ] || [ "${{ github.event.inputs.package }}" = "${NAME}" ]; then
-                echo "手动触发发布且包含 ${NAME}"
-              else
-                echo "手动触发发布但不包含 ${NAME}"
-                echo "${ECHO_NAME}_changed=false" >> $GITHUB_OUTPUT
-                return 0
-              fi
-            fi
-
-            echo "检验通过 ${NAME}"
-            echo "${ECHO_NAME}_changed=true" >> $GITHUB_OUTPUT
-            return 0
-          }
-
-          args=("core" "dev log" "check version" "copy text" "rollup external")
-          echo "开始循环点用验证函数"
-          for arg in "${args[@]}"; do
-            check_version "$arg"
-          done
-
-      - name: 检测设定的值
+      - name: 检测子包变更情况（推送代码时触发）
+        if: github.event_name == 'push'
+        id: detect-changes
         run: |
-          echo "核心包 ${{ steps.changed_packages.outputs.core_changed }}"
-          echo "dev 包 ${{ steps.changed_packages.outputs.dev_log_changed }}"
-          echo "版本检测包 ${{ steps.changed_packages.outputs.check_version_changed }}"
-          echo "复制文本包 ${{ steps.changed_packages.outputs.copy_text_changed }}"
-          echo "rollup 打包依赖排除包 ${{ steps.changed_packages.outputs.rollup_external_changed }}"
-          chmod +x ./scripts/pub.sh
+          ./scripts/detect_changes.sh
 
-      - name: 构建  core code
-        if: steps.changed_packages.outputs.core_changed == 'true'
+      - name: 检测子包变更情况（手动触发时触发）
+        if: github.event_name == 'workflow_dispatch'
+        id: workflow-changes
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          INPUT_PACKAGE: ${{ github.event.inputs.package }}
         run: |
-          ./scripts/pub.sh core
+          ./scripts/workflow_dispatch.sh
 
-      - name: 构建 dev log
-        if: steps.changed_packages.outputs.dev_log_changed == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: 设置工作根路径
         run: |
-          ./scripts/pub.sh dev-log
+          echo "REPO_ROOT=$(pwd)" >> $GITHUB_ENV
 
-      - name: 构建 check version
-        if: steps.changed_packages.outputs.check_version_changed == 'true'
+      - name: 发布到 npm
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          UPDATE_PACKAGES: ${{ env.update_packages }}
+          REPO_ROOT: ${{ env.REPO_ROOT }}
         run: |
-          ./scripts/pub.sh check-version
-
-      - name: 构建 copy text
-        if: steps.changed_packages.outputs.copy_text_changed == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: |
-          ./scripts/pub.sh copy-text
-
-      - name: 构建 rollup external
-        if: steps.changed_packages.outputs.rollup_external_changed == 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: |
-          ./scripts/pub.sh rollup-external
+          ./scripts/pub.sh

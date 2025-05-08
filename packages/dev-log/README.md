@@ -96,7 +96,7 @@ dev('包含子项的测试', it => {
 });
 
 // 可以异步执行
-dev('测试异步的代码', async it => {
+await dev('测试异步的代码', async it => {
   it('测试异代码 2️⃣ ', async () => {
     log('异步代码 2️⃣ 外部');
     return new Promise(resolve => {
@@ -121,6 +121,8 @@ dev('测试异步的代码', async it => {
   });
 });
 ```
+
+在使用异步的测试时，总是期待能够使用 `await` ，否者可能将收到 `TypeError`。
 
 ## 文档地址
 

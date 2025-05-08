@@ -1,4 +1,4 @@
-import pen from 'color-pen';
+import { pen } from 'color-pen';
 import { DevLogType } from './type';
 
 /**

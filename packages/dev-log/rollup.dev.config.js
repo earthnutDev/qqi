@@ -24,11 +24,11 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
-    // 打包压缩，自动去注释
-    // terser(),
-    // 可打包 json 内容
     json(),
-    typescript({}),
+    typescript({
+      module: 'esnext',
+      target: 'ES2024',
+    }),
     // 去除无用代码
     cleanup(),
   ],
