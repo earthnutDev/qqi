@@ -7,8 +7,6 @@ cd dist
 tag=$(node ./bin.mjs c=. 2>&1)
 exit_code=$?
 
-if [ $exit_code -eq 0 ];then
-  echo "$tag"
-else 
-  echo "$tag"
-fi
+
+echo "执行返回值 ${exit_code}"
+echo "执行打印值 ${tag}"

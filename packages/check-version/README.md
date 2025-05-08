@@ -85,6 +85,10 @@ fi
 echo "🚀🚀  发布成功，完结 🎉🎉 撒花 🎉🎉"
 ```
 
+使用 [`npx @qqi/check-version`](https://www.npmjs.com/package/@qqi/check-version) 获取的 tag 是符合标准 npm 的预发布版本的版本号的规则。通过 [`npx vjj`](https://www.npmjs.com/package/vjj) 进行版本的迭代管理即符合标准的 npm 的 publish 的预发布的 tag ，也将在 `CHANGELOG.md` 文件添加更新迭代的版本的日志记录的标题（广子，这就是广子）。
+
+所以，上面的 .sh 文件将提取 "0.0.1" 的 tag 值为 "latest"，提取
+
 ## 文档位置
 
 [@qqi/check-version](https://earthnut.dev/qqi/check-version)

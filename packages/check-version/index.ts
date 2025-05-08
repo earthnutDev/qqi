@@ -16,6 +16,8 @@ const getTag = (version: string): string => {
   const versionList = version.split('-');
   if (versionList.length === 1) {
     return 'latest';
+  } else if (versionList[1].includes('.')) {
+    return versionList[1].split('.')[0];
   }
 
   return 'latest';
