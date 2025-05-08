@@ -13,27 +13,76 @@ npm install --save @qqi/check-version
 默认使用方式为传入 `name` 参数，代码将执行判断工作目录下的 'packages/[name]' 子 npm 包的版本号是否已存在于线上
 
 ```bash
+# 写法一
 npx @qqi/check-version name=[name]
-
+# 写法二
 npx @qqi/check-version n=[name]
+# 写法三
+npx @qqi/check-version name [name]
+# 写法四
+npx @qqi/check-version n [name]
 ```
 
 也可以传入 `cwd` 参数覆盖默认的判断文件夹，默认查找 'packages' 文件夹下子 npm 包，若您习惯于其他命名方式
 
 ```bash
-# 倘若子主包 core 在 pkgs 文件夹下
-npx @qqi/.check-version name=core cwd=pkgs
+# 倘若子主包 core 在 lists 文件夹下
+npx @qqi/check-version name=core cwd=lists  # 推荐模式
 
-npx @qqi/.check-version n=core c=pkgs
+npx @qqi/check-version name core cwd lists
+
+npx @qqi/check-version name=core cwd lists
+
+npx @qqi/check-version name core cwd=lists
+
+npx @qqi/check-version n=core c=lists  # 推荐模式
+
+npx @qqi/check-version n core c lists
 ```
+
+默认的 name 值为 "." ，即以 packages 目录为项目的根（倘若 package.json 文件在这里的话）
 
 使用 skip 参数是否跳过执行线上版本检测（因为 '0.0.0' 的版本默认为跳过检测，若初始版本非 '0.0.0' 时 ，也可以使用该参数跳过检测）
 
 ```bash
-# 倘若子主包 core 在 pkgs 文件夹下
-npx @qqi/.check-version name=core cwd=pkgs skip
+# 倘若子主包 core 在 lists 文件夹下
+npx @qqi/check-version name=core cwd=lists skip  # 推荐模式
 
-npx @qqi/.check-version n=core c=pkgs s
+npx @qqi/check-version name=core cwd lists skip
+
+npx @qqi/check-version n=core c=lists s # 推荐模式
+
+npx @qqi/check-version n=core c lists s
+```
+
+若想在其他非分包的项目使用，即单独的项目使用配置，使用 `npx @qqi/check-version c=.` 即可。
+
+## 使用示例
+
+在 `pub.sh` 文件中使用时：
+
+```bash
+# 输出的 npm 发布的 tag。也可以通过调整 cwd 和 name 的参数来适配实际的项目地址
+output=$(npx @qqi/check-version c=. 2>&1)
+tag=""
+# 执行 npx  的返回值
+exit_code=$?
+
+# 如果执行成功，即 tag 值获取成功
+if [ $exit_code -eq 0 ];then
+  tag="$output"
+else
+  echo "$output"
+fi
+
+echo "开始发布 npm 包"
+
+if ! npm publish --provenance --access public --tag ${tag} ; then
+    echo "发布失败"
+    exit 0
+fi
+
+echo "🚀🚀  发布成功，完结 🎉🎉 撒花 🎉🎉"
 ```
 
 ## 文档位置

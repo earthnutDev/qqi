@@ -6,9 +6,20 @@ import {
   readFileToJsonSync,
   _p,
   PackageJson,
+  getDirectoryBy,
 } from 'a-node-tools';
 import { isUndefined, isNull } from 'a-type-of-js';
 import { Command } from 'a-command';
+
+/**  从版本号中解析到 dist tag  */
+const getTag = (version: string): string => {
+  const versionList = version.split('-');
+  if (versionList.length === 1) {
+    return 'latest';
+  }
+
+  return 'latest';
+};
 
 const command = new Command<{
   cwd: undefined;
@@ -19,7 +30,7 @@ const command = new Command<{
 command.bind([
   'cwd <c> (检测的工作文件夹的位置路径，缺省值为当前跟路径的 packages)',
   'skip <s> (跳过线上包版本检测， 默认值为 false)',
-  'name <n> (检测的子包名)',
+  'name <n> (检测的子包名，默认值为 .)',
 ]);
 
 command.run().isEnd(true);
@@ -29,7 +40,7 @@ const args = command.args.$map;
 /**  工作的相对路径  */
 const cwd = args.cwd?.value?.[0].toString() ?? 'packages';
 /** 获取输入的包名   */
-const name = args.name?.value?.[0].toString() ?? '';
+const name = args.name?.value?.[0].toString() ?? '.';
 /**  是否跳过检测  */
 const skip = args.skip?.value?.[0] !== false ? true : false;
 
@@ -40,7 +51,16 @@ if (isUndefined(name) || name === '') {
 }
 
 /**  文件路径  */
-const filePath = pathJoin(process.cwd(), cwd, name, 'package.json');
+let filePath = pathJoin(process.cwd(), cwd, name);
+
+/// 下面是冗余步骤，有助于在非根目录下查找 package.json 文件
+const dirPath = getDirectoryBy('package.json', 'file', filePath);
+if (isUndefined(dirPath)) {
+  _p(`${filePath} 文件路径不存在`, false);
+  process.exit(1);
+}
+
+filePath = pathJoin(dirPath, 'package.json');
 
 /**  文件路径  */
 const fileIsExist = fileExist(filePath);
@@ -69,7 +89,7 @@ if (isNull(pkgInfo.data)) {
     pkgInfo.status === 'notFound' &&
     (skip || fileContent.version === '0.0.0')
   ) {
-    _p(true, false);
+    _p(getTag(fileContent.version), false);
     process.exit(0);
   }
 
@@ -82,5 +102,5 @@ if (pkgInfo.data.time[fileContent.version]) {
   process.exit(1);
 }
 
-_p(true, false);
+_p(getTag(fileContent.version), false);
 process.exit(0);
