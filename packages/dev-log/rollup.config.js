@@ -28,13 +28,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: external({
-    exclude: ['a-', 'color-pen'],
-  }),
+  external: external(),
   plugins: [
     typescript({
-      target: 'es2017',
-      module: 'system',
       tsconfig: './tsconfig.rollup.json',
     }),
     resolve(),
