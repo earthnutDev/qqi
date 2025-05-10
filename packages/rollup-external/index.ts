@@ -15,6 +15,10 @@ const pen = bgRedPen.blink.bold.yellow;
  *
  * 依赖配置
  *
+ * - include   包含的包（想打包入结果的包） 。优先级最高
+ * - ignore  在排除的包却不需要在 dependencies  中的包，如： node:stream 等
+ * - exclude  排除且在依赖项中的包
+ *
  */
 export function external(options?: {
   /**  排除且在依赖项中的包  */

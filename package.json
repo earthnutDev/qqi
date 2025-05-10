@@ -20,19 +20,19 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^22.15.17",
-    "a-node-tools": "^3.1.4",
+    "a-node-tools": "^3.1.5",
     "a-type-of-js": "^0.3.0",
     "codecov": "^3.8.3",
     "color-pen": "^2.0.3",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-jsdoc": "^50.6.12",
+    "eslint-plugin-jsdoc": "^50.6.13",
     "globals": "^16.1.0",
     "gvv": "^0.0.0",
     "husky": "^9.1.7",
     "jja": "^2.3.2",
     "lint-staged": "^15.5.2",
-    "pjj": "^0.2.5",
+    "pjj": "^0.2.6",
     "prettier": "^3.5.3",
     "rollup": "^4.40.2",
     "rollup-plugin-cleanup": "^3.2.1",
@@ -40,7 +40,7 @@
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.0",
-    "vjj": "^0.3.4"
+    "vjj": "^0.3.5"
   },
   "lint-staged": {
     "src/**/*.{js,ts}": [

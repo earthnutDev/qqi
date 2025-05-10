@@ -2,9 +2,9 @@
 
 echo 'hello'
 
-cd dist
+# cd dist
 
-tag=$(node ./bin.mjs c=. 2>&1)
+tag=$(npx ./dist  c=. 2>&1)
 exit_code=$?
 
 

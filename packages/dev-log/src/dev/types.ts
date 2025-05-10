@@ -20,6 +20,7 @@ export interface OriginDevTool {
   afterEach: (fn?: DevContextHookFn) => void;
   /**  主测试的根名称  */
   name: string;
+  /**  不打印消息  */
 }
 
 /**

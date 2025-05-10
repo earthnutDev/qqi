@@ -28,9 +28,7 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: external({
-    exclude: ['a-'],
-  }),
+  external: external({}),
   plugins: [
     resolve(),
     commonjs(),

@@ -1,7 +1,7 @@
 {
   "name": "@qqi/copy-text",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "node 环境文本赋值到剪切板 📋",
   "license": "MIT",
   "scripts": {
@@ -16,7 +16,7 @@
     "test": "jja cls && rollup --config rollup.config.test.js && node test/out/test/index.mjs"
   },
   "dependencies": {
-    "a-js-tools": ">=0.6.1 <1.0.0",
-    "a-node-tools": "^3.1.2"
+    "a-js-tools": "^0.6.2",
+    "a-node-tools": "^3.1.5"
   }
 }

@@ -48,7 +48,7 @@ const skip = args.skip?.value?.[0] !== false ? true : false;
 
 /**  未检测到输入的包名，则返回 false  */
 if (isUndefined(name) || name === '') {
-  _p('为检测到输入的包名', false);
+  _p('未检测到输入的包名', false);
   process.exit(1);
 }
 

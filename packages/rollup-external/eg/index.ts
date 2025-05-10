@@ -1,3 +1,5 @@
 import { external } from '../index';
 
-external()('color-pen');
+external({
+  ignore: ['ignore'],
+})('color-pen-9');
