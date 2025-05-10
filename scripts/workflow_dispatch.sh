@@ -7,6 +7,7 @@ CHANGED_PACKAGE_ARRAY=()
 # 初始化最终要更新的包的数组
 UPDATE_PACKAGE_ARRAY=()
 
+# 读取 packages 下直接子文件夹名并放入到数组 CHANGED_PACKAGE_ARRAY 中 
 while IFS= read -r PACKAGE_DIR; do 
    PACKAGE_DIR=$(echo "${PACKAGE_DIR// /?}" | tr -s '?') #  保护我方空格
    CHANGED_PACKAGE_ARRAY+=("$PACKAGE_DIR")
@@ -38,20 +39,10 @@ check_version() {
   # 该包是否由手动触发选择
   if [ "$INPUT_PACKAGE" = "all" ] || [ "$INPUT_PACKAGE" = "${input}" ]; then
     echo "手动触发发布且包含 ${NAME}"
+    UPDATE_PACKAGE_ARRAY+=("$input")
+    return 0
   else
     echo "该包 ${input} 未在手动触发选择"
-    return 0
-  fi
-
-  echo "开始校验是否通过包版本审视"
-  if npx @qqi/check-version name=$input; then
-    echo "校验通过 ${NAME}"
-    echo "UPDATE_PACKAGE_ARRAY 追加数据：$input"
-    UPDATE_PACKAGE_ARRAY+=("$input")
-    echo "当前的 ${UPDATE_PACKAGE_ARRAY}"
-    return 0
-  else
-    echo "校验未通过 ${NAME}"
     return 0
   fi
 }
@@ -71,8 +62,8 @@ main() {
   # echo "update_packages=$UPDATE_PACKAGES" >> $GITHUB_OUTPUT    
   echo "update_packages=$UPDATE_PACKAGES" >> $GITHUB_ENV
 
-  printf "\e[31m检测版本需变更的包信息处理完成 \e[m$UPDATE_PACKAGES \n"
+  printf "\e[手动触发的包为 \e[m$UPDATE_PACKAGES \n"
 }
-
-echo "开始循环调用验证函数"
+echo "准备好了么"
 main
+echo "哈哈，执行 🎊 🎊 🎊"
