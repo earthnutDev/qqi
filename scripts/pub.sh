@@ -18,20 +18,21 @@ update_version() {
     local input="$1"
     local NAME=$(echo "${input//-/ }" | tr -s ' ') # 替换 - 为空格并删除重复的空格
     local CWD="${PACKAGES_DIR}/$input"
+
+    local tag=""
+    cd $REPO_ROOT # 每次需要手动更新到根下才能正确的校验版本号
+    if ! tag=$(npx "${CHECK_VERSION}" n=${input} 2>&1); then
+       echo "未通过版本校验：$tag"
+       return 0 
+    fi
+    echo "获取 ${NAME} 的发布标签为 ${tag}"
+
     if [ ! -d "$CWD" ]; then 
         echo "进入项目 $NAME 故障，路径为 ${CWD}"
         return 0
     fi
     cd "$CWD"
 
-    # npx 的使用并不会
-    local tag=""
-    install_check_version
-    if ! tag=$(npx "${CHECK_VERSION}" c=. 2>&1); then
-       echo "未通过版本校验：$tag"
-       return 0 
-    fi
-    echo "获取 ${NAME} 的发布标签为 ${tag}"
     # 依赖安装 
     npm ci
     if ! npm run build; then 
@@ -49,9 +50,10 @@ update_version() {
     
     echo "开始发布 $NAME npm 包 ${tag} 版本"
     if ! npm publish --provenance --access public --tag "${tag}" ; then
-        echo "$NAME 发布失败" 
+        echo "💥💥💥 $NAME 发布到 npm 💥💥💥"
         PUB_ERROR+=("$input")
-        return 0
+    else 
+        echo "🪧 $package  发布终结 🫧🫧🫧🫧🫧🫧"
     fi
 }
 
@@ -59,13 +61,10 @@ main() {
     # 校验版本可用情况
     if [ ! -d "$PACKAGES_DIR" ]; then
       echo "没有找到 ${PACKAGES_DIR}"
-      exit 1
+      exit 0
     fi
-    # 进入包工厂
-    cd "${PACKAGES_DIR}"
     echo "☁️ 来"
-    echo ${UPDATE_PACKAGES}
-    echo ${PACKAGE_ARRAY}
+    install_check_version # 检查版本包安装校验
     # 遍历变更的包数组，进行 npm 包推送
     # "${ARR[@]}" 引用数组所有元素
     # "${!ARR[@]}" 引用数组所有索引 ${ARR[$index]}

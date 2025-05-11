@@ -58,7 +58,7 @@ let filePath = pathJoin(process.cwd(), cwd, name);
 /// 下面是冗余步骤，有助于在非根目录下查找 package.json 文件
 const dirPath = getDirectoryBy('package.json', 'file', filePath);
 if (isUndefined(dirPath)) {
-  _p(`${filePath} 文件路径不存在`, false);
+  _p(`文件 ${filePath} 路径不存在`, false);
   process.exit(1);
 }
 
@@ -68,21 +68,21 @@ filePath = pathJoin(dirPath, 'package.json');
 const fileIsExist = fileExist(filePath);
 
 if (isUndefined(fileIsExist)) {
-  _p(`${filePath} 文件路径不存在`, false);
+  _p(`${filePath} 文件不存在`, false);
   process.exit(1);
 }
-
+/**  package.json 文件内容  */
 const fileContent = readFileToJsonSync<PackageJson>(filePath);
 
 if (isNull(fileContent)) {
-  _p(`读取 ${filePath} 出错`, false);
+  _p(`读取 ${filePath} 文件出错`, false);
   process.exit(1);
 }
 if (!fileContent.name || !fileContent.version) {
-  _p(`读取 ${filePath} 出错，未找到包名或版本号`, false);
+  _p(`未找到 ${filePath} 文件包名或版本号`, false);
   process.exit(1);
 }
-
+/**  线上同名包内容  */
 const pkgInfo = await getNpmPkgInfo(fileContent.name);
 
 // 包数据未找到或是版本号已存在则返回
@@ -95,7 +95,7 @@ if (isNull(pkgInfo.data)) {
     process.exit(0);
   }
 
-  _p(`${fileContent.name} 包未找到`, false);
+  _p(`${fileContent.name} 包未找到线上信息`, false);
   process.exit(1);
 }
 // 包数据未找到或是版本号已存在则返回

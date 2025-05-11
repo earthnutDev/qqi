@@ -94,7 +94,7 @@ echo "🚀🚀  发布成功，完结 🎉🎉 撒花 🎉🎉"
 
 上面的检测 @qqi/check-version 是否全局安装**至关重要**，关系着自动获取 tag 的命脉，不信的可以查看 [color-pen 的 tag](https://www.npmjs.com/package/color-pen?activeTab=versions)，删不掉，根本删不掉
 
-[![删不掉的 tag](https://raw.githubusercontent.com/earthnutDev/qqi/main/media/神奇tag.png)](https://github.com/earthnutDev/qqi/blob/main/media/神奇tag.png)
+[![删不掉的 tag](https://raw.githubusercontent.com/earthnutDev/qqi/main/media/神奇tag.png)](https://www.npmjs.com/package/color-pen?activeTab=versions)
 
 使用 [`npx @qqi/check-version`](https://www.npmjs.com/package/@qqi/check-version) 获取的 tag 是符合标准 npm 的预发布版本的版本号的规则。通过 [`npx vjj`](https://www.npmjs.com/package/vjj) 进行版本的迭代管理即符合标准的 npm 的 publish 的预发布的 tag ，也将在 `CHANGELOG.md` 文件添加更新迭代的版本的日志记录的标题（广子，这就是广子）。
 

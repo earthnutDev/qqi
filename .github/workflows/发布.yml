@@ -63,6 +63,9 @@ jobs:
           npm ci
           cd scripts
           chmod +x detect_changes.sh workflow_dispatch.sh pub.sh
+          # chmod +x scripts/detect_changes.sh
+          # chmod +x scripts/workflow_dispatch.sh
+          #chmod +x scripts/detect_changes.sh
 
       - name: 检测子包变更情况（推送代码时触发）
         if: github.event_name == 'push'
