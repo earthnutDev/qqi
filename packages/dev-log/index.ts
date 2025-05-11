@@ -24,6 +24,7 @@ export const dev = new Dev({
     running: true,
     id: Symbol(name),
   },
+  executionStack: [],
 });
 
 export default Dog;

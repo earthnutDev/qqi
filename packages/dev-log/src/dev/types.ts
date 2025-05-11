@@ -1,4 +1,4 @@
-export type DevCallBack<T> = (it: DevTool) => T | Promise<T>;
+export type DevCallBack<T = void> = (it: DevTool) => T | Promise<T>;
 
 /**
  *
@@ -80,4 +80,9 @@ export type InitDevOption = {
     running: boolean;
     description: string;
   };
+  /**  子调用的执行列表，让调用按顺序执行，而不是返回一个 typeError  */
+  executionStack: {
+    message: string;
+    callback: DevCallBack;
+  }[];
 };

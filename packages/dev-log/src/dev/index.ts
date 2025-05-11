@@ -9,9 +9,11 @@ import {
 } from './types';
 import {
   isAsyncFunction,
+  isEmptyArray,
   isFunction,
   isGeneratorFunction,
   isType,
+  isUndefined,
 } from 'a-type-of-js';
 import {
   bluePen,
@@ -45,7 +47,8 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
   const _name = options.name;
   /**  执行列表的描述  */
   const _description: string[] = [...(options.description || [''])];
-
+  /**  执行栈  */
+  const _executionStack = options.executionStack;
   /**  当前的执行状态，仅当上一步骤执行完毕时才允许下一步骤开始执行  */
   const runList: {
     /**  唯一 id  */
@@ -72,7 +75,26 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
   };
 
   /** 函数对象的主体  */
-  const _dev = async <T>(message: string, suite: DevCallBack<T>) => {
+  const _dev = async <T extends void = void>(
+    message: string,
+    suite: DevCallBack<T>,
+  ) => {
+    /**  当前（要）执行的块  */
+    const lastExecution = _executionStack[0];
+
+    if (isUndefined(lastExecution)) {
+      _executionStack.push({ message, callback: suite });
+    } else {
+      /**  当前（要）执行的块不是我  */
+      const isNotMe =
+        lastExecution.message !== message && lastExecution.callback !== suite;
+
+      // 执行的非自身则显示将自身推入执行栈
+      if (isNotMe) {
+        _executionStack.push({ message, callback: suite });
+        return;
+      }
+    }
     const id = Symbol(message);
     const lastRun = runList[runList.length - 1];
     const currentRun = {
@@ -101,22 +123,32 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
     /**  兼容打印  */
     const printf = (message: string) =>
       console.log(startsStr, ...colorText(message));
+
     dog('上一步执行', { ...lastRun });
     dog('当前执行', { ...currentRun });
     dog('父级给出的执行状态', { ...options.running });
     if (options.running.running === false) {
+      const parentMessage = redPen(options.running.description);
+      const awaitRun = yellowPen(lastRun.description);
       printf(
-        `当前 "${bluePen(message)}" 步骤父级 "${redPen(options.running.description)}" 已执行完毕 上一个步骤执行完毕 "${yellowPen(lastRun.description)}"`,
+        `当前 "${bluePen(message)}" 步骤
+        \r其父级 "${parentMessage}" 已执行完毕
+        \r上一个步骤执行却未执行完毕 "${awaitRun}"
+        \r现在期待 
+        \r"${parentMessage}-${awaitRun}" 
+        \r异步方法前有 await 等待
+        `,
       );
 
-      throw new RangeError('看上面 👆');
+      printf('\n\n\n\n\n看上面 👆\n\n\n\n');
     }
 
     if (lastRun && lastRun.running) {
+      const awaitRun = brightRedPen(lastRun.description);
       printf(
-        `当前 ${bluePen(message)} 期待上一个步骤执行完毕 ${brightRedPen(lastRun.description)}`,
+        `当前 ${bluePen(message)} 期待上一个步骤执行完毕 ${awaitRun}（可添加 await 等待 ${awaitRun}）`,
       );
-      throw new RangeError('看上面 👆');
+      printf('\n\n\n\n\n看上面 👆\n\n\n\n\n');
     }
 
     runList.push(currentRun);
@@ -167,6 +199,7 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
       level: _level + 1,
       randomColor: [..._randomColor],
       running: currentRun,
+      executionStack: [],
       ...(_level === 0
         ? {
             name: message,
@@ -240,8 +273,19 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
         console.error('Hook执行出错:', error);
       }
     }
+    _executionStack.shift(); // 弹出当前执行
     currentRun.running = false;
+    if (!isEmptyArray(_executionStack)) {
+      /**  当前执行的栈  */
+      const currentExecution = _executionStack[0];
+      if (isAsyncFunction(currentExecution.callback)) {
+        await _dev(currentExecution.message, currentExecution.callback);
+      } else {
+        _dev(currentExecution.message, currentExecution.callback);
+      }
+    }
   };
+
   Object.setPrototypeOf(_dev, this);
 
   const devParamList = [
@@ -258,6 +302,7 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
           name: _name,
           description: [..._description],
           running: options.running,
+          executionStack: [],
         }),
     ],
     ['name', () => _name],
