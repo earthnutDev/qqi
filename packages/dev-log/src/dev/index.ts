@@ -27,7 +27,7 @@ import { runningFalse } from './runningFalse';
 import { runNext } from './runNext';
 import { createDevParamList } from './devParamList';
 import { createPrintf } from './createPrintf';
-import { execFn } from './execFn';
+import { run } from './run';
 
 /**
  *
@@ -180,10 +180,10 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
     // TODO <#FF0>
     // 这里的 this 和  newThis 搞不清楚。。 需要再看
     /// 执行自身的 forEach
-    await Reflect.apply(execFn, newThis, [_runOption.hooks.before]);
+    await Reflect.apply(run, newThis, [_runOption.hooks.before]);
     // 执行由子测试的 beforeEach 绑定的 hook
     /// 执行顺序的特殊性导致执行钩子函数禁止🈲被封装
-    await Reflect.apply(execFn, this, [childOption.before]);
+    await Reflect.apply(run, this, [childOption.before]);
 
     // 执行测试主体
     try {
@@ -198,9 +198,9 @@ function Dev(this: OriginDevTool, options: InitDevOption): OriginDevTool {
     }
 
     /// 执行顺序的特殊性导致执行钩子函数禁止🈲被封装
-    await Reflect.apply(execFn, this, [childOption.after.reverse()]);
+    await Reflect.apply(run, this, [childOption.after.reverse()]);
     /// 执行顺序的特殊性导致执行钩子函数禁止🈲被封装
-    await Reflect.apply(execFn, newThis, [_runOption.hooks.after.reverse()]);
+    await Reflect.apply(run, newThis, [_runOption.hooks.after.reverse()]);
     _executionStack.shift(); // 弹出当前执行
     currentRun.running = false;
     runNext({
