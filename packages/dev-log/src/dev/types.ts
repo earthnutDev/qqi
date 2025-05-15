@@ -81,8 +81,30 @@ export type InitDevOption = {
     description: string;
   };
   /**  子调用的执行列表，让调用按顺序执行，而不是返回一个 typeError  */
-  executionStack: {
-    message: string;
-    callback: DevCallBack;
-  }[];
+  executionStack: ExecutionStack;
+};
+
+export type ExecutionStack = {
+  /**  执行的消息  */
+  message: string;
+  /**  执行的函数  */
+  callback: DevCallBack;
+  /**  是否跳过执行  */
+  skip: boolean;
+}[];
+
+export type RunOptions = {
+  /**  跳过执行  */
+  skip: boolean;
+  /**  当前执行的顶名  */
+  name: string;
+  /**  当前执行的次级名序  */
+  description: string[];
+  /**  当前的等级  */
+  level: number;
+  /**  执行的钩子  */
+  hooks: {
+    before: (DevContextHookFn | undefined)[];
+    after: (DevContextHookFn | undefined)[];
+  };
 };

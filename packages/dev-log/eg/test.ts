@@ -57,18 +57,29 @@ dev('测试 dev 是否打印消息', () => {
 });
 
 dev('测试 dev 的 foreach 功能', async it => {
+  it.after(() => {
+    console.log('after', it);
+    console.log('after', it.name);
+    console.log('after', it.description);
+  });
   let a = 0;
 
   it.afterEach(it => {
+    console.log('afterEach', it);
     a = 0;
     console.log('====================================');
-    // console.log(this, it);
     console.log('当前执行的名称为', it.name);
     console.log('当前执行的消息', it.description);
     console.log('====================================');
   });
 
-  await it('测试块 1', async () => {
+  await it('测试块 1', async it => {
+    it('测试块 1 的儿子', it => {
+      console.log(it.name);
+      console.log(it.description);
+      console.log(it);
+    });
+
     a++;
     await new Promise(resolve => {
       console.log('测试块 1 - 0', ++a);
@@ -107,8 +118,12 @@ dev('测试 dev 的 foreach 功能', async it => {
     });
   });
 });
-
-dev(
+dev.skip('非异步测试 001', it => {
+  it('测试 1', () => {});
+  it('测试 2', () => {});
+  it('测试 3', () => {});
+});
+await dev(
   '测试 dev 的 foreach 功能，但是每一个异步 it 块都不使用 await',
   async it => {
     let a = 0;
@@ -130,7 +145,7 @@ dev(
       });
     });
 
-    await it('测试块 2', async () => {
+    await it.skip('测试块 2', async () => {
       a++;
       await new Promise(resolve => {
         console.log('测试无等待块 2 - 0', ++a);
@@ -157,7 +172,8 @@ dev(
     });
   },
 );
-dev('非异步测试', it => {
+
+dev.skip('非异步测试 002', it => {
   it('测试 1', () => {});
   it('测试 2', () => {});
   it('测试 3', () => {});
