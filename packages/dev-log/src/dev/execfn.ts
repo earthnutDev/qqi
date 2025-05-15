@@ -1,6 +1,6 @@
 import { isAsyncFunction, isFunction, isGeneratorFunction } from 'a-type-of-js';
-import { Dev } from './index';
-import { DevContextHookFn } from './types';
+
+import { DevContextHookFn, DevTool } from './types';
 /**
  *
  * 执行函数
@@ -8,7 +8,7 @@ import { DevContextHookFn } from './types';
  * 现在以列队的方式执行，不考虑是否异步
  *
  */
-export async function execFn(this: typeof Dev, fnArr: DevContextHookFn[]) {
+export async function execFn(this: DevTool, fnArr: DevContextHookFn[]) {
   for (const fn of fnArr) {
     try {
       if (!fn) continue;
