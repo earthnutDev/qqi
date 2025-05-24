@@ -52,11 +52,11 @@ dev.skip('测试 test 的 foreach 功能', () => {
   });
 });
 
-dev('测试 dev 是否打印消息', () => {
+dev.skip('测试 dev 是否打印消息', () => {
   console.log('**********');
 });
 
-dev('测试 dev 的 foreach 功能', async it => {
+await dev.skip('测试 dev 的 foreach 功能', async it => {
   it.after(() => {
     console.log('after', it);
     console.log('after', it.name);
@@ -123,7 +123,7 @@ dev.skip('非异步测试 001', it => {
   it('测试 2', () => {});
   it('测试 3', () => {});
 });
-await dev(
+await dev.skip(
   '测试 dev 的 foreach 功能，但是每一个异步 it 块都不使用 await',
   async it => {
     let a = 0;

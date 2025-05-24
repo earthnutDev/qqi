@@ -16,9 +16,9 @@
     "test": "jja cls &&  npm run build && node dist/bin.mjs"
   },
   "dependencies": {
-    "a-command": "^2.1.9",
+    "a-command": "^2.2.1",
     "a-js-tools": "^0.6.2",
-    "a-node-tools": "^3.1.5",
+    "a-node-tools": "^4.1.1",
     "a-type-of-js": "^0.3.0"
   }
 }
