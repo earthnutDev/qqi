@@ -1,7 +1,7 @@
 {
   "name": "@qqi/check-version",
   "type": "module",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "private": true,
   "description": "一个检测工作目录下 packages 文件夹下子 npm 包版本是否存在的模块",
   "license": "MIT",
@@ -16,9 +16,9 @@
     "test": "jja cls &&  npm run build && node dist/bin.mjs"
   },
   "dependencies": {
-    "a-command": "^2.2.1",
-    "a-js-tools": "^0.6.2",
-    "a-node-tools": "^4.1.1",
-    "a-type-of-js": "^0.3.0"
+    "a-command": "^2.2.4",
+    "a-js-tools": "^1.0.0",
+    "a-node-tools": "^4.2.0",
+    "a-type-of-js": "^1.0.0"
   }
 }
