@@ -6,7 +6,7 @@ const _p = (it: DevTool) => {
   console.log('description: ', it.description);
 };
 
-dev('测试 name ', async it => {
+dev.skip('测试 name ', async it => {
   it.before(it => {
     console.log('带 it 的 before');
 

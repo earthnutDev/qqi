@@ -3,7 +3,9 @@ import { DevLog, DevLogType, DogOptions, PrivateFunc } from './type';
 import { setType } from './setType';
 import { blankCall } from './blankCall';
 import { managePrint } from './managePrint';
-import { isString } from 'a-type-of-js';
+import { isString, isUndefined } from 'a-type-of-js';
+import { platform } from './platform';
+import { esc } from '@color-pen/static';
 
 /**
  *
@@ -15,13 +17,26 @@ import { isString } from 'a-type-of-js';
  *
  */
 function Dog(this: DevLog, options?: DogOptions): DevLog {
-  const { name = '', type = false } = options || {};
-  /**  名字  */
-  const _name = isString(name)
+  let { name = '', type = false } = options || {};
+  // 处理 name
+  name = isString(name)
     ? name.trim().replace(/\s+/g, '_')
     : getRandomString(10);
+
+  const _env =
+    (platform === 'node' &&
+      (process.env[name.toUpperCase().concat('_DEV')] ??
+        process.env[name.toLowerCase().concat('_dev')])) ||
+    false;
+  const env =
+    isUndefined(_env) || _env === 'false'
+      ? false
+      : _env === 'true'
+        ? true
+        : (_env as DevLogType);
+
   /**  私有属性  */
-  let _type = setType(type);
+  type = setType(env ?? type);
 
   // 私有方法 error
   const _privateFunc: PrivateFunc = {
@@ -30,7 +45,7 @@ function Dog(this: DevLog, options?: DogOptions): DevLog {
     info: blankCall,
   };
 
-  managePrint(_type, _privateFunc, _name);
+  managePrint(type, _privateFunc, name);
 
   /**  本体方法  */
   const dog = (...str: unknown[]) => {
@@ -44,13 +59,13 @@ function Dog(this: DevLog, options?: DogOptions): DevLog {
   Object.defineProperties(this, {
     type: {
       get() {
-        return _type || false;
+        return type || false;
       },
       set(type: DevLogType) {
         const new_type = setType(type);
-        if (new_type !== _type) {
-          _type = new_type;
-          managePrint(new_type, _privateFunc, _name);
+        if (new_type !== type) {
+          type = new_type;
+          managePrint(new_type, _privateFunc, name);
         }
       },
     },
@@ -72,7 +87,13 @@ function Dog(this: DevLog, options?: DogOptions): DevLog {
   return dog as unknown as DevLog;
 }
 
-Dog.prototype.clear = () => console.clear();
+Dog.prototype.clear = () => {
+  if (platform === 'browser') {
+    console.clear();
+  } else {
+    console.log(esc.concat('c'));
+  }
+};
 
 /**
  *

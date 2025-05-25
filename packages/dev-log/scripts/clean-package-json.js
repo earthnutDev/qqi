@@ -12,25 +12,25 @@ let packageJson = readFileToJsonSync('./package.json');
 );
 
 packageJson = {
-  main: 'cjs/index.cjs',
-  module: 'mjs/index.mjs',
-  types: 'types/index.d.ts',
+  main: 'index.cjs',
+  module: 'index.mjs',
+  types: 'index.d.ts',
   author: {
     name: 'earthnut',
     email: 'earthnut.dev@outlook.com',
     url: 'https://earthnut.dev',
   },
   ...packageJson,
-  files: ['cjs', 'mjs', 'types'],
+  files: ['index.cjs', 'index.mjs', 'index.d.ts', 'src'],
   exports: {
     '.': {
       import: {
-        default: './mjs/index.mjs',
-        types: './types/index.d.ts',
+        default: './index.mjs',
+        types: './index.d.ts',
       },
       require: {
-        default: './cjs/index.cjs',
-        types: './types/index.d.ts',
+        default: './index.cjs',
+        types: './index.d.ts',
       },
     },
   },

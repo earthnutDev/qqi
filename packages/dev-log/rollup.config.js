@@ -15,16 +15,15 @@ export default {
       preserveModules: true,
       sourcemap: false,
       exports: 'named',
-      dir: 'dist/mjs',
+      dir: 'dist/',
     },
-    //  若是生成 `bin` 类型，或是生成的文件不包含 commonJs，下面导出 commonJs 的配置可是删除
     {
       format: 'cjs',
       entryFileNames: '[name].cjs',
       preserveModules: true,
       sourcemap: false,
       exports: 'named',
-      dir: 'dist/cjs',
+      dir: 'dist/',
     },
   ],
   // 配置需要排除的包

@@ -14,20 +14,21 @@ import Dog, { dev } from '..';
 //   console.log('我是大弟，你们执行完再执行我');
 // });
 
-const dog = new Dog({ type: 'all', name: 'dev log' });
+const dog = new Dog({ type: false, name: 'dev log' });
 
 const cat = new Dog();
 
-dev.skip('测试 dog', it => {
+await dev('测试 dog', async it => {
   cat('cat info');
   dog('----***----');
-  dog(cat.type);
+  dog('dog type: ', dog.type);
+  dog('cat type:', cat.type);
   dog('----***----');
 
-  it('被跳过执行的 1', () => {
+  await it('被跳过执行的 1', () => {
     console.log(1);
   });
-  it('被跳过执行的 2', () => {
+  await it('被跳过执行的 2', () => {
     console.log(2);
   });
 });

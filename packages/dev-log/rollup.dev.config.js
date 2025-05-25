@@ -3,9 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
-
-/** 配置需要不打包进生产包的包名配置  */
-const excludedPkg = ['node:', 'a-', 'color-pen'];
+import { external } from '@qqi/rollup-external';
 
 export default {
   input: 'eg/index.ts',
@@ -20,7 +18,7 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: id => new RegExp('^'.concat(excludedPkg.join('|^'))).test(id),
+  external: external(),
   plugins: [
     resolve(),
     commonjs(),
