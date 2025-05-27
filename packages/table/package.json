@@ -1,0 +1,23 @@
+{
+  "name": "@qqi/table",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "一个简单的在控制台构建表格的工具 🔧",
+  "license": "MIT",
+  "scripts": {
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "clean:package-json": "node ./scripts/clean-package-json.js",
+    "build": "jja rm dist && npm run b && npm run clean:package-json",
+    "diff": "jja pkg --diff",
+    "eslint": "jja cls && eslint src",
+    "beautify": "npm run prettier",
+    "prettier": "jja cls && prettier . --write",
+    "vjj": "vjj",
+    "test": "jja cls && rollup --config rollup.config.eg.js && node test/out/test/index.mjs"
+  },
+  "dependencies": {
+    "a-js-tools": "^1.0.0",
+    "a-type-of-js": "^1.0.0",
+    "color-pen": "^2.0.10"
+  }
+}
