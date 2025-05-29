@@ -13,11 +13,11 @@
     "beautify": "npm run prettier",
     "prettier": "jja cls && prettier . --write",
     "vjj": "vjj",
-    "test": "jja cls && rollup --config rollup.config.eg.js && node test/out/test/index.mjs"
+    "test": "ihot"
   },
   "dependencies": {
     "a-js-tools": "^1.0.0",
-    "a-type-of-js": "^1.0.0",
+    "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"
   }
 }

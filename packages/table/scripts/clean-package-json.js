@@ -31,8 +31,8 @@ packageJson = {
       },
     },
   },
-  keywords: ['@qqi/rollup-external', '@qqi'],
-  homepage: 'https://earthnut.dev/qqi/rollup-external',
+  keywords: ['@qqi/table', '@qqi'],
+  homepage: 'https://earthnut.dev/qqi/table',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',
