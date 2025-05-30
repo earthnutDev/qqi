@@ -26,8 +26,10 @@ export function render(table: QQITableEle) {
   } else {
     console.log(
       ...resultArr.map((e, i) => {
-        if (i > 0 && e !== '') {
-          const newStr = e + 'font-family:monospace;white-space:pre;';
+        if (i > 0) {
+          const newStr =
+            e +
+            "font-family:'Fira Code',Consolas,Monaco,Courier,'等宽字体',monospace; font-size:12px;word-spacing:normal;padding:0;margin:0;";
           return newStr;
         }
         return e;

@@ -2,6 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
 import cleanup from 'rollup-plugin-cleanup';
 import copy from 'rollup-plugin-copy';
 import { external } from '@qqi/rollup-external';
@@ -12,7 +13,7 @@ export default {
     {
       format: 'es',
       entryFileNames: '[name].mjs',
-      preserveModules: true,
+      preserveModules: false,
       sourcemap: false,
       exports: 'named',
       dir: 'dist/',
@@ -21,7 +22,7 @@ export default {
     {
       format: 'cjs',
       entryFileNames: '[name].cjs',
-      preserveModules: true,
+      preserveModules: false,
       sourcemap: false,
       exports: 'named',
       dir: 'dist',
@@ -40,6 +41,7 @@ export default {
       tsconfig: './tsconfig.rollup.json',
     }),
     cleanup(),
+    terser(),
     copy({
       targets: [
         { src: 'README.md', dest: 'dist' },

@@ -47,7 +47,8 @@ export function buildBody(
       } else {
         /**  默认的画笔 (用于绘制空值时的表格)  */
         const cellPen = createPen(ele);
-        result += cellPen`\u2002${cutoffStringWithChar(ele.content?.toString() || '', e)}\u2002`;
+        const str = ele.content?.toString() || '';
+        result += cellPen`\u2002${cutoffStringWithChar(str, e)}\u2002`;
       }
       if (i === lineMaxIndex) {
         result += fine.v;

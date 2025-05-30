@@ -18,7 +18,7 @@ packageJson = {
     email: 'earthnut.dev@outlook.com',
     url: 'https://earthnut.dev',
   },
-  files: ['index.mjs', 'index.cjs', 'index.d.ts'],
+  files: ['index.mjs', 'index.cjs', 'index.d.ts', 'src'],
   exports: {
     '.': {
       import: {

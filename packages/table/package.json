@@ -1,7 +1,7 @@
 {
   "name": "@qqi/table",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "一个简单的在控制台构建表格的工具 🔧",
   "license": "MIT",
   "scripts": {
