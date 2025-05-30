@@ -12,6 +12,10 @@
 
 ```bash
 npm install  --save colored-table
+
+# 亦可 (两包以后将同步版本发布)
+
+npm install --save @qqi/table
 ```
 
 ## 使用
@@ -35,13 +39,21 @@ table.addRow(['我在第三行第一列', '我在第三行第二列']);
 table();
 ```
 
-效果：
+格式效果：
 
 | 第一列           | 第二列           |
 | :--------------- | :--------------- |
 | 我在第一行第一列 | 我在第一行第二列 |
 | 我在第二行第一列 | 我在第二行第二列 |
 | 我在第三行第一列 | 我在第三行第二列 |
+
+在浏览器效果：
+
+[![浏览器表格](https://raw.githubusercontent.com/earthnutDev/qqi/main/media/浏览器表格.png)](https://github.com/earthnutDev/qqi/blob/main/media/浏览器表格.png)
+
+带表情的效果
+
+[![浏览器表格](https://raw.githubusercontent.com/earthnutDev/qqi/main/media/浏览器表格-with-emoji.png)](https://github.com/earthnutDev/qqi/blob/main/media/浏览器表格-with-emoji.png)
 
 ### setFontSize
 

@@ -32,7 +32,7 @@ packageJson = {
       },
     },
   },
-  keywords: ['colored-table'],
+  keywords: ['colored-table', 'qqi', '@qqi', '@qqi/table'],
   homepage: 'https://earthnut.dev/colored-table',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
