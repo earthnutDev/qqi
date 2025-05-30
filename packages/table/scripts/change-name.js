@@ -13,7 +13,7 @@ let packageJson = readFileToJsonSync('./package.json');
 
 packageJson = {
   ...packageJson,
-  name: 'colored-table',
+  name: '@qqi/table',
   author: {
     name: 'earthnut',
     email: 'earthnut.dev@outlook.com',
@@ -32,7 +32,7 @@ packageJson = {
       },
     },
   },
-  keywords: ['colored-table'],
+  keywords: ['@qqi/table', '@qqi', 'colored-table'],
   homepage: 'https://earthnut.dev/colored-table',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',

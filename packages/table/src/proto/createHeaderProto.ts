@@ -1,9 +1,9 @@
 import { RowProto } from '../parse/parseRow';
-import { QQITableBorder, QQITableCommonOption } from '../types';
+import { ColoredTableBorder, ColoredTableCommonOption } from '../types';
 
 /** 表头  */
 class HeaderProto extends RowProto {
-  border: QQITableBorder = {
+  border: ColoredTableBorder = {
     left: {
       style: 'bold',
       color: undefined,
@@ -25,8 +25,8 @@ class HeaderProto extends RowProto {
 
 /**  设置 header 的原型  */
 export function createHeaderProto(
-  tableProto: QQITableCommonOption,
-): QQITableCommonOption {
+  tableProto: ColoredTableCommonOption,
+): ColoredTableCommonOption {
   const headerProto = new HeaderProto();
 
   Object.setPrototypeOf(headerProto, tableProto);

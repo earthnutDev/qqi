@@ -1,11 +1,11 @@
 import { isBusinessEmptyString, isType, isUndefined } from 'a-type-of-js';
 import { pen } from 'color-pen';
-import { QQITableCommon } from '../types';
+import { ColoredTableCommon } from '../types';
 
 /**  默认的笔  */
 export function createPen(options: unknown) {
   let defaultPen = pen;
-  if (isType<QQITableCommon>(options)) {
+  if (isType<ColoredTableCommon>(options)) {
     if (options.bold) defaultPen = defaultPen.bold;
     if (
       !isBusinessEmptyString(options.bgColor) &&

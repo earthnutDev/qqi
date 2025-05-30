@@ -1,5 +1,9 @@
 import { isArray, isUndefined } from 'a-type-of-js';
-import { QQITableOptions, QQITableCommonOption, QQITableEle } from '../types';
+import {
+  ColoredTableOptions,
+  ColoredTableCommonOption,
+  ColoredTableEle,
+} from '../types';
 import { globalData } from '../global';
 import { setPro } from '../proto/setPro';
 import { TableEleClass } from '../ele/tableEle';
@@ -14,8 +18,8 @@ class TableProto {}
  *
  */
 export function parse(
-  options: QQITableOptions,
-): [QQITableEle, QQITableCommonOption] {
+  options: ColoredTableOptions,
+): [ColoredTableEle, ColoredTableCommonOption] {
   // 初始化时可为空（undefined）
   if (isUndefined(options)) {
     options = {};
@@ -29,10 +33,12 @@ export function parse(
   }
 
   /**  表格的原型属性  */
-  const tableProto: QQITableCommonOption = new TableProto();
+  const tableProto: ColoredTableCommonOption = new TableProto();
+
   // 将在 options 上配置的属性配置到原型上
   setPro(tableProto, options);
-  Object.setPrototypeOf(TableProto, globalData);
+
+  Object.setPrototypeOf(tableProto, globalData);
   // 创建表格
   const table = new TableEleClass(tableProto);
 

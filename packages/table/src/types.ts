@@ -1,8 +1,13 @@
 /**  表格的单元格的内容数据格式  */
-export type QQITableCellValue = string | number | undefined | boolean | null;
+export type ColoredTableCellValue =
+  | string
+  | number
+  | undefined
+  | boolean
+  | null;
 
 /**   表格的边框样式 (当前版本仅 `simple`、`undefined` 值可用) */
-export type QQITableBorderStyle =
+export type ColoredTableBorderStyle =
   | undefined
   | 'simple'
   | 'bold'
@@ -10,42 +15,42 @@ export type QQITableBorderStyle =
   | 'dash';
 
 /**  表格的边框  */
-export type QQITableUnilateralBorder = {
-  style: QQITableBorderStyle;
+export type ColoredTableUnilateralBorder = {
+  style: ColoredTableBorderStyle;
   color: string | undefined;
 };
 
 /**  配置单边边框属性  */
-export type QQITableUnilateralBorderOptions = {
-  [x in keyof QQITableUnilateralBorder]?: QQITableUnilateralBorder[x];
+export type ColoredTableUnilateralBorderOptions = {
+  [x in keyof ColoredTableUnilateralBorder]?: ColoredTableUnilateralBorder[x];
 };
 
 /**  表格的单边边框（最终解析）  */
-export type QQITableBorder = {
-  left: QQITableUnilateralBorder;
-  right: QQITableUnilateralBorder;
-  top: QQITableUnilateralBorder;
-  bottom: QQITableUnilateralBorder;
+export type ColoredTableBorder = {
+  left: ColoredTableUnilateralBorder;
+  right: ColoredTableUnilateralBorder;
+  top: ColoredTableUnilateralBorder;
+  bottom: ColoredTableUnilateralBorder;
 };
 
 /**  配置四个方向的边框  */
-export type QQITableBorderOptions = {
-  [x in keyof QQITableBorder]?: QQITableUnilateralBorderOptions;
+export type ColoredTableBorderOptions = {
+  [x in keyof ColoredTableBorder]?: ColoredTableUnilateralBorderOptions;
 };
 
 /**  边框配置  */
-export type QQIBorderOptions =
-  | QQITableBorderStyle
-  | QQITableBorderOptions
-  | QQITableUnilateralBorderOptions;
+export type ColoredBorderOptions =
+  | ColoredTableBorderStyle
+  | ColoredTableBorderOptions
+  | ColoredTableUnilateralBorderOptions;
 
 /**  文本对齐方式  */
-export type QQITableContentAlign = 'left' | 'center' | 'right';
+export type ColoredTableContentAlign = 'left' | 'center' | 'right';
 
 /**  公有属性，继承制  */
-export type QQITableCommon = {
+export type ColoredTableCommon = {
   /**  对齐  */
-  align: QQITableContentAlign;
+  align: ColoredTableContentAlign;
   /**  文本色  */
   color: string;
   /**  背景色  */
@@ -59,71 +64,79 @@ export type QQITableCommon = {
 };
 
 /**  一个使用的简单的除数据外的属性  */
-export type QQITableCommonOption = {
-  [x in keyof QQITableCommon]?: QQITableCommon[x];
+export type ColoredTableCommonOption = {
+  [x in keyof ColoredTableCommon]?: ColoredTableCommon[x];
 } & {
-  border?: QQIBorderOptions;
+  border?: ColoredBorderOptions;
 };
 
 /**  表格的单元格配置  */
-export type QQITableCellNoBorder = {
+export type ColoredTableCellNoBorder = {
   /**  内容（文本）  */
-  content: QQITableCellValue;
-} & QQITableCommon;
+  content: ColoredTableCellValue;
+} & ColoredTableCommon;
 
 /**  带表格的单元格配置  */
-export type QQITableCell = QQITableCellNoBorder & {
-  border: QQITableBorder;
+export type ColoredTableCell = ColoredTableCellNoBorder & {
+  border: ColoredTableBorder;
 };
 
 /**  单行  */
-export type QQITableRow = {
-  data: (QQITableCell | undefined)[];
-} & QQITableCommon & {
-    border: QQITableBorder;
+export type ColoredTableRow = {
+  data: (ColoredTableCell | undefined)[];
+} & ColoredTableCommon & {
+    border: ColoredTableBorder;
   };
 
-export type QQITableRowOptionData =
-  | QQITableCellValue
-  | ({ [x in keyof QQITableCellNoBorder]?: QQITableCellNoBorder[x] } & {
-      border?: QQIBorderOptions;
+export type ColoredTableRowOptionData =
+  | ColoredTableCellValue
+  | ({ [x in keyof ColoredTableCellNoBorder]?: ColoredTableCellNoBorder[x] } & {
+      border?: ColoredBorderOptions;
     })
   | undefined;
 
 /**  单行表数据  */
-export type QQITableRowOption =
-  | QQITableRowOptionData[]
+export type ColoredTableRowOption =
+  | ColoredTableRowOptionData[]
   | ({
-      data?: QQITableRowOptionData[];
-    } & QQITableCommonOption);
+      data?: ColoredTableRowOptionData[];
+    } & ColoredTableCommonOption);
 
 /**  使用单元格  */
-export type QQITableEle = {
+export type ColoredTableEle = {
   /**  表头  */
-  header?: QQITableRow;
+  header?: ColoredTableRow;
   /**  表干  */
-  body: QQITableRow[];
-} & QQITableCommon &
-  QQITableBorder;
+  body: ColoredTableRow[];
+} & ColoredTableCommon &
+  ColoredTableBorder;
 
 /**  单元格  */
-export type QQITableOptions =
+export type ColoredTableOptions =
   | ({
       /**  头部  */
-      header?: QQITableRowOption;
+      header?: ColoredTableRowOption;
       /**  内容  */
-      body?: QQITableRowOption[];
-    } & QQITableCommonOption)
-  | QQITableRowOption[]
+      body?: ColoredTableRowOption[];
+    } & ColoredTableCommonOption)
+  | ColoredTableRowOption[]
   | undefined;
 
 /**  表  */
-export type QQITable = {
+export type ColoredTable = {
   /**  开始构建  */
   (): void;
 } & {
   /**  添加表头  */
-  setHeader(data: QQITableRowOption): QQITable;
+  setHeader(data: ColoredTableRowOption): ColoredTable;
   /**  添加行  */
-  addRow(data: QQITableRowOption): QQITable;
+  addRow(data: ColoredTableRowOption): ColoredTable;
+  /**
+   * 设置字体大小
+   *
+   * （该值仅影响浏览器环境，不支持终端环境）
+   *
+   * 缺省值： 12
+   */
+  setFontSize(fontSize: number): ColoredTable;
 };

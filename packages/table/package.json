@@ -1,8 +1,8 @@
 {
-  "name": "@qqi/table",
+  "name": "colored-table",
   "type": "module",
-  "version": "0.0.1",
-  "description": "一个简单的在控制台构建表格的工具 🔧",
+  "version": "0.0.2",
+  "description": "一个简单的在控制台及控制台构建彩色文本表格的工具 🔧",
   "license": "MIT",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
@@ -16,6 +16,7 @@
     "test": "ihot"
   },
   "dependencies": {
+    "@color-pen/static": "^1.0.0",
     "a-js-tools": "^1.0.0",
     "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"

@@ -12,24 +12,24 @@ import { table } from './src/core';
  */
 const tableClass = createConstructor(table);
 
-export { tableClass as QqiTable, tableClass as Table };
+export { tableClass as ColoredTable, tableClass as Table };
 
 export type {
-  QQITableCellValue,
-  QQITableBorderStyle,
-  QQITableUnilateralBorder,
-  QQITableUnilateralBorderOptions,
-  QQITableBorder,
-  QQITableBorderOptions,
-  QQIBorderOptions,
-  QQITableContentAlign,
-  QQITableCommon,
-  QQITableCommonOption,
-  QQITableCellNoBorder,
-  QQITableCell,
-  QQITableRowOption,
-  QQITableEle,
-  QQITableOptions,
+  ColoredTableCellValue,
+  ColoredTableBorderStyle,
+  ColoredTableUnilateralBorder,
+  ColoredTableUnilateralBorderOptions,
+  ColoredTableBorder,
+  ColoredTableBorderOptions,
+  ColoredBorderOptions,
+  ColoredTableContentAlign,
+  ColoredTableCommon,
+  ColoredTableCommonOption,
+  ColoredTableCellNoBorder,
+  ColoredTableCell,
+  ColoredTableRowOption,
+  ColoredTableEle,
+  ColoredTableOptions,
 } from './src/types';
 
-export { globalData as QQITableGlobalData } from './src/global';
+export { globalData as ColoredTableGlobalData } from './src/global';

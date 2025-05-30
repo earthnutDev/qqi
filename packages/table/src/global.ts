@@ -1,14 +1,28 @@
-import { QQITableBorder, QQITableCommon, QQITableContentAlign } from './types';
+import { ColoredTableBorder, ColoredTableContentAlign } from './types';
+
+import { isNode } from 'a-js-tools';
+
+/**  浏览器环境  */
+export const browserEnv = !isNode();
+
+export const data = {
+  emojiLength: 2.08,
+  emojiRegex:
+    /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}]/gu,
+  chineseLength: 1.8,
+  /**  中文的正则  */
+  chineseRegex: /[\u4E00-\u9FFF]/g,
+};
 
 /**  全局的属性  */
-class QQITableGlobalData {
-  align: QQITableContentAlign = 'left';
+class ColoredTableGlobalData {
+  align: ColoredTableContentAlign = 'left';
   color: string = '';
   bgColor: string = '';
   bold: boolean = false;
   underline: boolean = false;
   italic: boolean = false;
-  border: QQITableBorder = {
+  border: ColoredTableBorder = {
     left: {
       color: undefined,
       style: 'simple',
@@ -36,5 +50,4 @@ class QQITableGlobalData {
  *
  * 即为默认属性
  */
-export const globalData: QQITableCommon & { border: QQITableBorder } =
-  new QQITableGlobalData();
+export const globalData = new ColoredTableGlobalData();

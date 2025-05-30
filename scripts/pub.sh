@@ -55,6 +55,18 @@ update_version() {
     else 
         echo "🪧 $package  发布终结 🫧🫧🫧🫧🫧🫧"
     fi
+    cd ../
+    if [ -f "./scripts/change-name.js" ]; then 
+          node ./scripts/change-name.js
+          cd "${BUILD_DIST}" 
+          echo "开始发布 $NAME npm 包 ${tag} 版本"
+          if ! npm publish --provenance --access public --tag "${tag}" ; then
+              echo "💥💥💥 $NAME 发布到 npm 💥💥💥"
+              PUB_ERROR+=("$input")
+          else 
+              echo "🪧 $package  发布终结 🫧🫧🫧🫧🫧🫧"
+          fi
+    fi
 }
 
 main() {

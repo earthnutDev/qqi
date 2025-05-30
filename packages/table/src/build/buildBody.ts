@@ -1,12 +1,13 @@
-import { QQITableRow } from '../types';
+import { ColoredTableRow } from '../types';
 import { isNull, isUndefined } from 'a-type-of-js';
 import { createPen } from './createPen';
 import { cutoffStringWithChar } from 'color-pen';
 import { lines } from '../lines';
+import { terminalResetStyle } from '@color-pen/static';
 
 /**  构建表头  */
 export function buildBody(
-  body: QQITableRow[],
+  body: ColoredTableRow[],
   lineList: number[],
   hasHeader: boolean,
 ): string {
@@ -20,13 +21,17 @@ export function buildBody(
 
   lineList.forEach((e, i) => {
     if (i === 0) {
+      result += terminalResetStyle;
       result += hasHeader ? fine.lc : fine.lt;
     }
+    result += terminalResetStyle;
     result += fine.l.repeat(e + 2);
 
     if (i === lineMaxIndex) {
+      result += terminalResetStyle;
       result += hasHeader ? fine.rc : fine.rt;
     } else {
+      result += terminalResetStyle;
       result += hasHeader ? fine.c : fine.ct;
     }
   });
@@ -38,6 +43,7 @@ export function buildBody(
     const defaultPen = createPen(row);
 
     lineList.forEach((e, i) => {
+      result += terminalResetStyle;
       result += fine.v;
       /**  当前的元素  */
       const ele = row.data[i];
@@ -47,10 +53,16 @@ export function buildBody(
       } else {
         /**  默认的画笔 (用于绘制空值时的表格)  */
         const cellPen = createPen(ele);
-        const str = ele.content?.toString() || '';
+        let str = ele.content?.toString() || '';
+        str = str
+          .replace(/[\n]/g, '\\n')
+          .replace(/\r/g, '\\r')
+          .replace(/\t/g, '\\t');
+        result += terminalResetStyle;
         result += cellPen`\u2002${cutoffStringWithChar(str, e)}\u2002`;
       }
       if (i === lineMaxIndex) {
+        result += terminalResetStyle;
         result += fine.v;
       }
     });
@@ -59,14 +71,18 @@ export function buildBody(
     const isLastRow = body.length - 1 === index;
     lineList.forEach((e, i) => {
       if (i === 0) {
+        result += terminalResetStyle;
         result += isLastRow ? fine.lb : fine.lc;
       }
+      result += terminalResetStyle;
       result += fine.l.repeat(e + 2);
 
       if (i === lineMaxIndex) {
         // 最后一行的最后一个
+        result += terminalResetStyle;
         result += isLastRow ? fine.rb : fine.rc;
       } else {
+        result += terminalResetStyle;
         result += isLastRow ? fine.cb : fine.c;
       }
     });

@@ -1,11 +1,11 @@
 import { createConstructor } from 'a-js-tools';
-import { QQITableCommonOption, QQITableEle } from '../types';
+import { ColoredTableCommonOption, ColoredTableEle } from '../types';
 
 /** TableEleClass 类，原始构建类   */
 export const TableEleClass = createConstructor(function (
-  this: QQITableEle,
-  proto: QQITableCommonOption,
-): QQITableEle {
+  this: ColoredTableEle,
+  proto: ColoredTableCommonOption,
+): ColoredTableEle {
   this.body = [];
   this.header = undefined;
 

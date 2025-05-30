@@ -1,15 +1,15 @@
 import { isString, isType, isUndefined } from 'a-type-of-js';
 import {
-  QQITableCommonOption,
-  QQITableBorderStyle,
-  QQITableUnilateralBorderOptions,
-  QQITableBorder,
+  ColoredTableCommonOption,
+  ColoredTableBorderStyle,
+  ColoredTableUnilateralBorderOptions,
+  ColoredTableBorder,
 } from '../types';
 
 /**  配置原型上的属性  */
 export function setPro(
-  targetObj: QQITableCommonOption,
-  options: QQITableCommonOption,
+  targetObj: ColoredTableCommonOption,
+  options: ColoredTableCommonOption,
 ) {
   if (options.align) {
     targetObj.align = options.align;
@@ -32,7 +32,7 @@ export function setPro(
   }
 
   if (options.border) {
-    if (isType<QQITableBorderStyle>(options.border, e => isString(e))) {
+    if (isType<ColoredTableBorderStyle>(options.border, e => isString(e))) {
       const style = options.border;
       targetObj.border = {
         left: {
@@ -53,7 +53,7 @@ export function setPro(
         },
       };
     } else if (
-      isType<QQITableUnilateralBorderOptions>(options.border, e =>
+      isType<ColoredTableUnilateralBorderOptions>(options.border, e =>
         (['color', 'style'] as const).some(i => !isUndefined(e[i])),
       )
     ) {
@@ -85,7 +85,7 @@ export function setPro(
         ),
       );
     } else if (
-      isType<QQITableBorder>(options.border, e =>
+      isType<ColoredTableBorder>(options.border, e =>
         (['left', 'right', 'top', 'bottom'] as const).some(
           i => !isUndefined(e[i]),
         ),
