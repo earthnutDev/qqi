@@ -8,6 +8,8 @@
     "eslint": "jja cls && eslint packages",
     "beautify": "npm run eslint && npm run prettier",
     "prettier": "jja cls && prettier . --write",
+    "push:version": "gvv",
+    "gvv": "gvv",
     "prepublishOnly": "pjj"
   },
   "devDependencies": {
@@ -20,8 +22,8 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^22.15.29",
-    "a-command": "^2.2.5",
-    "a-node-tools": "^4.2.3",
+    "a-command": "^2.3.0",
+    "a-node-tools": "^4.2.4",
     "a-type-of-js": "^1.0.1",
     "codecov": "^3.8.3",
     "color-pen": "^2.0.10",
