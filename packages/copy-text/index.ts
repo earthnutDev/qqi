@@ -24,10 +24,7 @@ export async function copyTextToClipboard(str: string) {
     return '';
   }
 
-  await runOtherCode({
-    code: command,
-    printLog: false,
-  });
+  await runOtherCode(command);
 
   return str;
 }

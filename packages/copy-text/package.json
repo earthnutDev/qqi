@@ -13,10 +13,10 @@
     "beautify": "npm run prettier",
     "prettier": "jja cls && prettier . --write",
     "vjj": "vjj",
-    "test": "jja cls && rollup --config rollup.config.test.js && node test/out/test/index.mjs"
+    "test": "jja cls && rollup --config rollup.config.eg.js && node .eg/index.mjs"
   },
   "dependencies": {
     "a-js-tools": "^1.0.0",
-    "a-node-tools": "^4.2.4"
+    "a-node-tools": "^4.2.5"
   }
 }
