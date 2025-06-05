@@ -15,15 +15,17 @@ export function copyTextToClipboard(str: string) {
   }
   const currentOs = process.platform;
 
-  str = str.replace(/\s+$/, '');
+  const input = str.replace(/\s+$/, '');
 
   if (currentOs === 'darwin') {
-    execSync('pbcopy', { input: str });
+    execSync('pbcopy', { input });
+    return str;
   } else if (currentOs === 'win32') {
-    const base64 = Buffer.from(str).toString('base64');
+    const base64 = Buffer.from(input).toString('base64');
     execSync(`powershell -sta -noni -NoProfile -EncodedCommand ${base64}`, {
       stdio: 'ignore',
     });
+    return str;
   } else {
     return '';
   }
