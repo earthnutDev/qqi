@@ -1,3 +1,3 @@
 import { copyTextToClipboard } from '..';
 
-copyTextToClipboard('123');
+copyTextToClipboard('46');

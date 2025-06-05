@@ -1,5 +1,5 @@
 import { isNode } from 'a-js-tools';
-import { runOtherCode } from 'a-node-tools';
+import { execSync } from 'node:child_process';
 
 /**
  *
@@ -9,22 +9,22 @@ import { runOtherCode } from 'a-node-tools';
  *
  *
  */
-export async function copyTextToClipboard(str: string) {
+export function copyTextToClipboard(str: string) {
   if (!isNode()) {
     throw new TypeError('该函数不支持当前环境');
   }
-  let command = '';
   const currentOs = process.platform;
 
+  str = str.replace(/\s+$/, '');
+
   if (currentOs === 'darwin') {
-    command = `echo ${str} | pbcopy`;
+    execSync('pbcopy', { input: str });
   } else if (currentOs === 'win32') {
-    command = `powershell -command "Set-Clipboard -Value '${str}'"`;
+    const base64 = Buffer.from(str).toString('base64');
+    execSync(`powershell -sta -noni -NoProfile -EncodedCommand ${base64}`, {
+      stdio: 'ignore',
+    });
   } else {
     return '';
   }
-
-  await runOtherCode(command);
-
-  return str;
 }

@@ -2,6 +2,8 @@
 
 通过 `node:os` 的 `homedir` 获取当前用户的主目录。但受到用户的环境变量和系统配置的影响，该值返回可能非预期值。
 
+[qqi](https://www.npmjs.com/package/qqi) 与名下 [check version 校验 npm 版本是否重复且返回发布的 dist tag](https://www.npmjs.com/package/@qqi/check-version)、[copy text node 环境复制到剪切板](https://www.npmjs.com/package/@qqi/copy-text)、[dev log 在开始时打印](https://www.npmjs.com/package/@qqi/dev-log)、[rollup external 一个使用 rollup 打包为 npm 库排除依赖](https://www.npmjs.com/package/@qqi/rollup-external)、[table 一个在终端或是浏览器控制台打印彩色文本强大表格的工具](https://www.npmjs.com/package/@qqi/table) 没有直接的关系
+
 ## 安装
 
 ```bash

@@ -45,7 +45,6 @@ export class QQI {
   /**  写入文件  */
   write(fileName: string, content: object) {
     const _ = pathJoin(this.#filename, fileName);
-
     const _dir = pathJoin(_, '../');
     dog('创建的文件路径为');
     mkdirSync(_dir, { recursive: true });
