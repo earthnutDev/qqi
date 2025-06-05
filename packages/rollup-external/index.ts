@@ -6,7 +6,8 @@ import {
   pathJoin,
   readFileToJsonSync,
 } from 'a-node-tools';
-import { bgRedPen } from 'color-pen';
+import { bgRedPen, hexPen } from 'color-pen';
+import { copyTextToClipboard } from '@qqi/copy-text';
 
 /**  一个展示 🖊️  */
 const pen = bgRedPen.blink.bold.yellow;
@@ -73,16 +74,20 @@ export function external(options?: {
         dependencies.includes(id) === false &&
         ignorePkg.every(e => !id.startsWith(e))
       ) {
-        _p(`${pen(id)} 依赖被排除打包却未再 package.json 中配置`);
-        process.exit(1);
-      }
-    } else {
-      // 包不存在于配置中，但是却是非本地包
-      if (/^[^./]/g.test(id)) {
-        _p(`${pen(id)} 依赖未被排除，打包关闭`);
+        _p(`${pen(id)} ${copy(id)} 依赖被排除打包却未再 package.json 中配置`);
         process.exit(1);
       }
     }
+    // 包不存在于配置中，但是却是非本地包
+    else if (/^[^./]/g.test(id)) {
+      _p(`${pen(id)}  ${copy(id)}  依赖未被排除，打包关闭`);
+      process.exit(1);
+    }
     return result;
   };
+}
+
+/**  复制  */
+function copy(str: string) {
+  return copyTextToClipboard(str) === str ? hexPen('#666')`已复制` : '';
 }

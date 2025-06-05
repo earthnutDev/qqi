@@ -2,4 +2,4 @@ import { external } from '../index';
 
 external({
   ignore: ['ignore'],
-})('color-pen-9');
+})('color-pe1n-9');
