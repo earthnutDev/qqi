@@ -28,9 +28,11 @@ export function parseError(type: DevLogType) {
       },
     );
 
-    const res = parseErrorResult.filter(
+    const result = parseErrorResult.filter(
       e => e.name !== '' && e.path !== undefined,
-    )[3];
+    );
+
+    const res = result[3] ?? result[2] ?? result[1] ?? result[0];
 
     const startStr = ` ${type === 'info' ? '💡' : type === 'error' ? '❌' : '⚠️ '} ${new Date().toLocaleString()} `;
 
@@ -43,7 +45,7 @@ export function parseError(type: DevLogType) {
     )(startStr);
 
     console.log(
-      `${printStartPenStr} ${res.name} ${res.line ? res.line.concat(' 行') : ''} ${res.column ? res.column.concat(' 列') : ''}`,
+      `${printStartPenStr} ${res?.name ?? ''}  ${res?.line?.concat(' 行')} ${res?.column?.concat(' 列')}`,
     );
   }
 }
