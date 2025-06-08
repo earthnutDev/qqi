@@ -26,6 +26,6 @@ export function getVerifiedHomeDir() {
     return home;
   } catch (error) {
     dog.error(error);
-    throw new Error(`主目录不可写 < ${home} > ${error}`);
+    return undefined;
   }
 }

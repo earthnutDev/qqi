@@ -21,7 +21,10 @@ import { QQI } from 'qqi';
  *
  * 创建用户目录下的 `~/.earthnut.dev.data/test/`  的读写机
  *
- * 若没有找到用户目录，则抛出错误
+ * 若没有找到用户目录或是没有写入的权限，则不可用。 `qqi.available` 值将为 `false`
+ *
+ * 在不可用时，直接拦截读写。读将直接返回 `null`,写直接返回 `false`
+ *
  */
 const qqi = new QQI('test');
 
@@ -48,4 +51,4 @@ qqi.write('test', { a: 10 });
 
 ## 文档地址
 
-[@qqi/rollup-external](https://earthnut.dev/qqi/rollup-external)
+[qqi](https://earthnut.dev/qqi)

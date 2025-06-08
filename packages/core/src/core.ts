@@ -16,23 +16,43 @@ import { mkdirSync } from 'node:fs';
 export class QQI {
   #filename: string;
 
+  #available: boolean = true;
+
+  /**  值是否可用  */
+  get available(): boolean {
+    return this.#available;
+  }
+
   /**
    *  构造函数
    *
    * @param fileName  文件名
    */
   constructor(fileName: string) {
-    this.#filename = pathJoin(
-      getVerifiedHomeDir(),
-      '.earthnut.dev.data',
-      `${fileName}`,
-    );
+    const homeDir = getVerifiedHomeDir();
+
+    if (isUndefined(homeDir)) {
+      this.#available = false;
+      this.#filename = '';
+      return;
+    }
+    this.#available = true;
+    this.#filename = pathJoin(homeDir, '.earthnut.dev.data', `${fileName}`);
   }
 
-  /**  获取某文件的  */
+  /**
+   * 获取某文件的
+   *
+   *
+   * @param fileName 读取文件的地址
+   * @returns 当读取受限或是读取失败返回 null；可读取却没有数据，返回是一个空对象
+   */
   read<T extends Record<string, unknown> = Record<string, unknown>>(
     fileName: string,
-  ): T | Record<string, never> {
+  ): T | Record<string, never> | null {
+    if (!this.available) {
+      return null;
+    }
     const _ = pathJoin(this.#filename, fileName);
     const __ = fileExist(_);
 
@@ -42,8 +62,20 @@ export class QQI {
       return (readFileToJsonSync(_) as T) || {};
     }
   }
-  /**  写入文件  */
+  /**
+   * 写入文件
+   *
+   * 写入并不是总能如意，当写入受限（this.available 值为 false）或是写入不成功都将返回 false
+   *
+   * @param fileName  写入文件的名
+   * @param content  要写入的内容
+   * @returns 返回写入的状态，倘若不允许向用户目录下写入文件或是写入失败，都将返回 false
+   */
   write(fileName: string, content: object) {
+    if (!this.available) {
+      return false;
+    }
+
     const _ = pathJoin(this.#filename, fileName);
     const _dir = pathJoin(_, '../');
     dog('创建的文件路径为');
