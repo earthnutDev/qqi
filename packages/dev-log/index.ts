@@ -27,6 +27,4 @@ export const dev = new Dev({
   executionStack: [],
 });
 
-export default Dog;
-
 export type { DevLogType, DevLog } from './src/dog/type';
