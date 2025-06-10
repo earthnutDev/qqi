@@ -1,4 +1,11 @@
-import { isArray, isNull, isUndefined } from 'a-type-of-js';
+import {
+  isArray,
+  isNull,
+  isUndefined,
+  isPlainObject,
+  isString,
+  isBusinessEmptyString,
+} from 'a-type-of-js';
 import {
   _p,
   getDirectoryBy,
@@ -23,27 +30,48 @@ const pen = bgRedPen.blink.bold.yellow;
  */
 export function external(options?: {
   /**  排除且在依赖项中的包  */
-  exclude?: string[];
+  exclude?: string[] | string;
   /**  在排除的包却不需要在 dependencies  中的包，如： node:stream 等  */
-  ignore?: string[];
+  ignore?: string[] | string;
   /**  包含的包（想打包入结果的包）  */
-  include?: string[];
+  include?: string[] | string;
 }) {
-  const { exclude, ignore, include } = options || {};
+  if (isUndefined(options))
+    options = {
+      exclude: [],
+      ignore: [],
+      include: [],
+    };
+
+  if (!isPlainObject) return;
+  if (isString(options.exclude)) options.exclude = [options.exclude];
+  options.exclude?.forEach((e, i, a) => {
+    if (isString(e)) a[i] = '';
+  });
+  options.exclude = options.exclude?.filter(e => !isBusinessEmptyString(e));
+  if (isString(options.ignore)) options.ignore = [options.ignore];
+  options.ignore?.forEach((e, i, a) => {
+    if (isString(e)) a[i] = '';
+  });
+  options.ignore = options.ignore?.filter(e => !isBusinessEmptyString(e));
+  if (isString(options.include)) options.include = [options.include];
+  options.include?.forEach((e, i, a) => {
+    if (isString(e)) a[i] = '';
+  });
+  options.include = options.include?.filter(e => !isBusinessEmptyString(e));
+
+  const { exclude, ignore, include } = options;
 
   const packageDir = getDirectoryBy('package.json', 'file');
 
-  if (isUndefined(packageDir)) {
-    throw new RangeError('package.json 文件不存在');
-  }
+  if (isUndefined(packageDir)) throw new RangeError('package.json 文件不存在');
 
   const packagePath = pathJoin(packageDir, 'package.json');
   /**  读取当前文件  */
   const packInfo = readFileToJsonSync<PackageJson>(packagePath);
 
-  if (isNull(packInfo)) {
-    throw new RangeError('package.json 文件不存在');
-  }
+  if (isNull(packInfo)) throw new RangeError('package.json 文件不存在');
+
   /**  已配置的依赖  */
   const dependencies = Object.keys({
     ...(packInfo.dependencies || {}),

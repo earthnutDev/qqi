@@ -12,6 +12,8 @@
     "eslint": "jja cls && eslint src",
     "beautify": "npm run prettier",
     "prettier": "jja cls && prettier . --write",
+    "push": "gvv",
+    "push:version": "gvv",
     "vjj": "vjj",
     "test": "ihot"
   },

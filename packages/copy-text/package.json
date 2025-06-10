@@ -1,7 +1,7 @@
 {
   "name": "@qqi/copy-text",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "node 环境文本复制文本到剪切板 📋",
   "license": "MIT",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "a-js-tools": "^1.0.0",
-    "a-node-tools": "^4.2.5"
+    "a-node-tools": "^4.2.6"
   }
 }

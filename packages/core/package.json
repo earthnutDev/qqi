@@ -1,7 +1,7 @@
 {
   "name": "qqi",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "简单的文件读写",
   "license": "MIT",
   "scripts": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "@color-pen/static": "^1.0.0",
     "@qqi/dev-log": "^1.0.3",
-    "a-node-tools": "^4.2.5",
+    "a-node-tools": "^4.2.6",
     "a-type-of-js": "^1.0.0",
     "color-pen": "^2.0.10"
   }

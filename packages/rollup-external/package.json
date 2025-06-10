@@ -1,7 +1,7 @@
 {
   "name": "@qqi/rollup-external",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "用于 rollup 打包 📦 时排除异己的工具 🔧",
   "license": "MIT",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@qqi/copy-text": "^1.0.2",
-    "a-node-tools": "^4.2.5",
+    "a-node-tools": "^4.2.6",
     "a-type-of-js": "^1.0.1",
     "color-pen": "^2.0.10"
   }
