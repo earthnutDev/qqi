@@ -22,13 +22,15 @@ import { external } from '@qqi/rollup-external';
 export default {
   ... 其他配置,
   external: external({
+    // 默认排除 package.json 中 dependencies 的依赖
     // 排除 `node:`、`a-`、`color-pen` 、`@qqi`开头的依赖
     exclude: ["node:", "a-" ,"color-pen", "@qqi/"],
-    // 忽略 `node:` 开头的包在 package.json 中未声明为 dependencies 的依赖
-    // 未配置改项，若项目中包含 `node:` 或是使用 `src/` 等路径，则报错 “依赖未被排除，打包关闭”
-    ignore: ["node:", "src/"],
+    // 忽略 `node:` 开头的包在 package.json 中未声明的 dependencies 的依赖
+    // 未配置改项，若项目中包含 `node:`
+    ignore: ["node:"],
     // 一定要包含的依赖，将被打包入打包文件夹内
-    include: ['@qqi/copy-text']
+    //  或是使用 `src/` 等路径，则报错 “依赖未被排除，打包关闭”
+    include: ['@qqi/copy-text','src/utils', 'src/dog']
   }),
   ... 其他配置,
 
