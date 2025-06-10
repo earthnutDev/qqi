@@ -43,7 +43,7 @@ export function external(options?: {
       include: [],
     };
 
-  if (!isPlainObject) return;
+  if (!isPlainObject(options)) return () => true;
   if (isString(options.exclude)) options.exclude = [options.exclude];
   options.exclude?.forEach((e, i, a) => {
     if (isString(e)) a[i] = '';
