@@ -28,7 +28,9 @@ export default {
     },
   ],
   // 配置需要排除的包
-  external: external({}),
+  external: external({
+    ignore: ['node:'],
+  }),
   plugins: [
     resolve(),
     commonjs(),

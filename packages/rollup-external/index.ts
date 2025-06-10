@@ -1,3 +1,4 @@
+import { Dog } from '@qqi/dev-log';
 import {
   isArray,
   isNull,
@@ -19,6 +20,11 @@ import { copyTextToClipboard } from '@qqi/copy-text';
 /**  一个展示 🖊️  */
 const pen = bgRedPen.blink.bold.yellow;
 
+const dog = new Dog({
+  name: 'qqi rollup external',
+  type: false,
+});
+
 /**
  *
  * 依赖配置
@@ -36,6 +42,7 @@ export function external(options?: {
   /**  包含的包（想打包入结果的包）  */
   include?: string[] | string;
 }) {
+  dog('初始化的参数', options);
   if (isUndefined(options))
     options = {
       exclude: [],
@@ -43,22 +50,30 @@ export function external(options?: {
       include: [],
     };
 
-  if (!isPlainObject(options)) return () => true;
+  if (!isPlainObject(options)) {
+    dog('当前处理后的参数非对象，返回函数');
+    return () => true;
+  }
+  if (isUndefined(options.exclude)) options.exclude = [];
   if (isString(options.exclude)) options.exclude = [options.exclude];
   options.exclude?.forEach((e, i, a) => {
-    if (isString(e)) a[i] = '';
+    if (!isString(e)) a[i] = '';
   });
   options.exclude = options.exclude?.filter(e => !isBusinessEmptyString(e));
+  dog('处理完 exclude 的参数', options);
+  if (isUndefined(options.ignore)) options.ignore = [];
   if (isString(options.ignore)) options.ignore = [options.ignore];
   options.ignore?.forEach((e, i, a) => {
-    if (isString(e)) a[i] = '';
+    if (!isString(e)) a[i] = '';
   });
   options.ignore = options.ignore?.filter(e => !isBusinessEmptyString(e));
+  if (isUndefined(options.include)) options.include = [];
   if (isString(options.include)) options.include = [options.include];
   options.include?.forEach((e, i, a) => {
-    if (isString(e)) a[i] = '';
+    if (!isString(e)) a[i] = '';
   });
   options.include = options.include?.filter(e => !isBusinessEmptyString(e));
+  dog('处理完的参数', options);
 
   const { exclude, ignore, include } = options;
 
