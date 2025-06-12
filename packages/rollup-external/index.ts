@@ -1,11 +1,13 @@
 import { Dog } from '@qqi/dev-log';
 import {
-  isArray,
   isNull,
   isUndefined,
   isPlainObject,
   isString,
   isBusinessEmptyString,
+  isTrue,
+  isFalse,
+  isEmptyArray,
 } from 'a-type-of-js';
 import {
   _p,
@@ -93,31 +95,33 @@ export function external(options?: {
     ...(packInfo.preDependencies || {}),
   });
 
-  const ignorePkg =
-    isUndefined(ignore) || !isArray(ignore)
-      ? dependencies
-      : [...ignore, ...dependencies];
-  /** 配置需要不打包进生产包的包名配置  */
-  const excludedPkg =
-    isUndefined(exclude) || !isArray(exclude) ? ['node:'] : exclude;
+  const ignorePkg = isEmptyArray(ignore)
+    ? dependencies
+    : [...ignore, ...dependencies];
+  /** 配置需要不打包进生产包的包名配置 （这就保证了 excludedRegExp 非空 ） */
+  const excludedPkg = isEmptyArray(exclude) ? ['node:'] : exclude;
 
   const excludedRegExp = new RegExp(
     '^'.concat([...ignorePkg, ...excludedPkg].join('|^')),
   );
-  const includedPkg = isUndefined(include) || !isArray(include) ? [] : include;
+  // 由于参数的强校验，这里被省略了
+  // const includedPkg = isUndefined(include) || !isArray(include) ? [] : include;
 
   return (id: string) => {
-    if (includedPkg.includes(id)) return false;
+    // 包存在于 included 中，直接交给 rollup 处理
+    if (include.includes(id)) return false;
+    // 重制识别位置
     excludedRegExp.lastIndex = 0;
+    /**  是否在设定排除之外（包含要忽略的包）  */
     const result = excludedRegExp.test(id);
     /// 保证排除的包纯在于
-    if (result === true) {
+    if (isTrue(result)) {
       if (
         // 检测到了包名存在于配置中
-        dependencies.includes(id) === false &&
+        isFalse(dependencies.includes(id)) &&
         ignorePkg.every(e => !id.startsWith(e))
       ) {
-        _p(`${pen(id)} ${copy(id)} 依赖被排除打包却未再 package.json 中配置`);
+        _p(`${pen(id)} ${copy(id)} 依赖被排除打包却未在 package.json 中配置`);
         process.exit(1);
       }
     }
