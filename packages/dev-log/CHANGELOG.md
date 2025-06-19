@@ -1,5 +1,9 @@
 # qqi_dev-log
 
+## v1.0.5 (2025-6-20)
+
+- 添加了 'browser' 的支持，在使用 `babel` 的项目，在正式环境，希望通过 [@qqi/babel-plugin-remove-dog-calls](https://www.npmjs.com/package/@qqi/babel-plugin-remove-dog-calls) 搭配自定义环境变量来控制 `dog` 的打包。使用方法参见 [@qqi/babel-plugin-remove-dog-calls](https://www.npmjs.com/package/@qqi/babel-plugin-remove-dog-calls) 。
+
 ## v1.0.4 (2025-6-10)
 
 - 么事。移除了默认导出项

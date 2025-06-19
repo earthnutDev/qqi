@@ -38,6 +38,7 @@ function Dog(this: DevLog, options?: DogOptions): DevLog {
   /**  私有属性  */
   type = setType(env ?? type);
 
+  /// 原始的调用方法，在 type 值变化时会触发该值的更替
   // 私有方法 error
   const _privateFunc: PrivateFunc = {
     error: blankCall,

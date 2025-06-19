@@ -1,7 +1,7 @@
 {
   "name": "@qqi/dev-log",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "description": "在 dev 环境使用 name_dev 启动日志打印",
   "scripts": {
@@ -24,8 +24,8 @@
   "license": "MIT",
   "dependencies": {
     "@color-pen/static": "^1.0.0",
-    "a-js-tools": "^1.0.0",
-    "a-type-of-js": "^1.0.1",
-    "color-pen": "^2.0.10"
+    "a-js-tools": "^1.0.1",
+    "a-type-of-js": "^1.0.2",
+    "color-pen": "^2.0.11"
   }
 }
