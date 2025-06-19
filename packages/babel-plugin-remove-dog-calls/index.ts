@@ -9,11 +9,13 @@ export default function (babel: { types: any }) {
 
         if (
           t.isMemberExpression(callee.node) &&
-          t.idIdentifier(callee.node.object, { name: 'dog' }) &&
+          t.isIdentifier(callee.node.object, { name: 'dog' }) &&
           (t.isIdentifier(callee.node.property, { name: 'info' }) ||
             t.isIdentifier(callee.node.property, { name: 'warn' }) ||
             t.isIdentifier(callee.node.property, { name: 'error' }))
         ) {
+          path.remove();
+        } else if (t.isIdentifier(callee.node, { name: 'dog' })) {
           path.remove();
         }
       },

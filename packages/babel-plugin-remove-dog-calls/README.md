@@ -14,10 +14,26 @@ npm install --save-dev @qqi/babel-plugin-remove-dog-calls
 
 该项会在运行时拦截 `dog`（通过 const dog = new Dog() 创建的）的正式环境的执行。可能会牵连其他非 `@qqi/dev-log` 创建的项
 
-```json
-{
-  "presets": ["@babel/preset-react"]
-  ,"plugins": [process.env.NODE_ENV=== "production" && "@qqi/babel-plugin-remove-dog-calls"].filter(Boolean)
+之前的示例使用的为 '.babelrc' 文件。但是， _其不支持使用动态_，所以需要使用 'babel.config.js' 文件来定义 babel 设置。
+
+```js
+export default function (api) {
+  api.cache(true);
+  // 根据当前的设定的变量来设定是否使用该插件
+  const isProduction = process.env.NODE_ENV === 'production';
+
+  return {
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-react',
+      '@babel/preset-typescript',
+    ],
+    plugins: [
+      '@babel/plugin-proposal-class-properties',
+      process.env.NODE_ENV === 'production' &&
+        '@qqi/babel-plugin-remove-dog-calls',
+    ].filter(Boolean),
+  };
 }
 ```
 
