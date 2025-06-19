@@ -35,7 +35,7 @@ packageJson = {
   },
   repository: {
     type: 'git',
-    url: 'git+https://github.com/earthnutDev/qqi/babel-plugin-remove-dog-calls.git',
+    url: 'git+https://github.com/earthnutDev/qqi.git',
   },
   author: {
     name: '🥜',
@@ -46,10 +46,10 @@ packageJson = {
   engines: {
     node: '>=18.0.0',
   },
-  keywords: ['qqi/babel-plugin-remove-dog-calls'],
+  keywords: ['babel-plugin-remove-dog-calls', 'qqi'],
   homepage: 'https://earthnut.dev',
   bugs: {
-    url: 'https://github.com/earthnutDev/qqi/babel-plugin-remove-dog-calls/issues',
+    url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',
   },
 };
