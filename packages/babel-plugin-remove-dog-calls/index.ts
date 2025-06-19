@@ -4,7 +4,11 @@ export default function (babel: { types: any }) {
   return {
     name: 'remove-qqi-dog-calls',
     visitor: {
-      CallExpression(path: { get: (arg0: string) => any; remove: () => void }) {
+      CallExpression(path: {
+        get: (arg0: string) => any;
+        remove: () => void;
+        scope: { getBinding: (arg0: any) => any };
+      }) {
         const callee = path.get('callee');
 
         if (
@@ -15,8 +19,18 @@ export default function (babel: { types: any }) {
             t.isIdentifier(callee.node.property, { name: 'error' }))
         ) {
           path.remove();
-        } else if (t.isIdentifier(callee.node, { name: 'dog' })) {
-          path.remove();
+        }
+        // 处理调用的 dog()
+        else if (t.isIdentifier(callee.node)) {
+          const binding = path.scope.getBinding(callee.node.name);
+          if (
+            binding &&
+            ['import', 'module'].some(e => binding?.kind === e) &&
+            binding?.path?.parent?.source?.value?.endsWith('/dog') &&
+            binding?.identifier?.name === 'dog'
+          ) {
+            path.remove();
+          }
         }
       },
     },

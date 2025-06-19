@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "version": "0.0.2",
-  "name": "@qqi/babel-plugin-remove-dog-calls",
-  "description": "用于 webpack 使用 babel 时排出 @qqi/dev-log 在浏览器端的使用",
+  "version": "0.0.0",
+  "name": "@qqi/dev",
+  "description": "原 @qqi/dev-log 的 dev 部分",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "build": "npm run b && npm run clean:package",
@@ -14,5 +14,11 @@
     "prepublishOnly": "pjj",
     "clean:package": "node scripts/clean-package-json.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@qqi/dev-log": "^1.0.5",
+    "a-js-tools": "^1.0.1",
+    "a-type-of-js": "^1.0.2",
+    "color-pen": "^2.0.11"
+  }
 }
