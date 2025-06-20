@@ -4,7 +4,7 @@
   "private": true,
   "description": "一些开发工具",
   "scripts": {
-    "diff": "jja pkg --diff",
+    "diff": "jja pkg --diff=淘宝",
     "eslint": "jja cls && eslint packages",
     "beautify": "npm run eslint && npm run prettier",
     "prettier": "jja cls && prettier . --write",
@@ -50,9 +50,5 @@
       "eslint --fix",
       "prettier --write"
     ]
-  },
-  "dependencies": {
-    "ihhh": "^0.0.0",
-    "ihot": "^0.0.2"
   }
 }

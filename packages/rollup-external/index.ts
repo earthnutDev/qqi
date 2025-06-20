@@ -1,4 +1,4 @@
-import { Dog } from '@qqi/dev-log';
+import { Dog } from '@qqi/log';
 import {
   isNull,
   isUndefined,
@@ -37,11 +37,14 @@ const dog = new Dog({
  *
  */
 export function external(options?: {
-  /**  排除且在依赖项中的包  */
+  /**  排除且在依赖项中的包（在构建发布后，不会因为依赖项缺失而导致包版本失效）  */
   exclude?: string[] | string;
   /**  在排除的包却不需要在 dependencies  中的包，如： node:stream 等  */
   ignore?: string[] | string;
-  /**  包含的包（想打包入结果的包）  */
+  /**
+   * 包含的包（想打包入结果的包）。优先级最高（譬如：src/ 这种需要 rollup 处理的）。
+   *
+   * 但是该项不像 ignore 和 exclude 是 `startsWith` 匹配，该项是完整权等匹配  */
   include?: string[] | string;
 }) {
   dog('初始化的参数', options);

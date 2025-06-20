@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@color-pen/static": "^1.0.0",
-    "@qqi/dev-log": "^1.0.3",
-    "a-node-tools": "^4.2.6",
+    "@qqi/log": "^0.0.0",
+    "a-node-tools": "^4.2.9",
     "a-type-of-js": "^1.0.0",
     "color-pen": "^2.0.10"
   }

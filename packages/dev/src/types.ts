@@ -6,7 +6,6 @@ export type DevCallBack<T = void> = (it: DevTool) => T | Promise<T>;
  *
  *
  */
-
 export interface OriginDevTool {
   /**  本体方法  */
   <T = void>(message: string, callBack: DevCallBack<T>): T | Promise<T>;

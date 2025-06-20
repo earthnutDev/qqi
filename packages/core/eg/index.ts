@@ -6,6 +6,8 @@ const a = qqi.read<{ a: number }>('test');
 console.log('====================================');
 console.log(a);
 console.log('====================================');
-a.a = 10;
+if (a?.a) {
+  a.a = 10;
 
-qqi.write('test', a);
+  qqi.write('test', a);
+}

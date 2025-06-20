@@ -8,7 +8,7 @@
 npm install --save-dev @qqi/dev
 ```
 
-## 使用 dev
+## 使用
 
 在单元测试的时候使用 `jest` ，在功能测试时使用 `node:test` 和 `node:assert`。但是测试的时候，总是有打印的消息被 `node:test` 的结果覆盖。所以，写了一个简介的 dev ，用于功能测试。
 

@@ -1,2 +1,3 @@
 import { sayHello } from '../index';
-    sayHello(); 
+
+sayHello();
