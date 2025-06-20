@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "name": "@qqi/log",
   "description": "原 @qqi/dev-log 中的 log 部分",
   "scripts": {

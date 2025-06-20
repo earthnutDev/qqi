@@ -42,8 +42,16 @@ export function managePrint(
   }
   // 在 非 node 环境始终执行，搭配 @qqi/babel-plugin-remove-dog-calls 使用
   else {
-    privateFunc.info = printInfo;
-    privateFunc.warn = printWarn;
-    privateFunc.error = printError;
+    if (type === false) return Reflect.apply(notSupport, privateFunc, []);
+
+    privateFunc.info = ['all', 'info', true].includes(type)
+      ? printInfo
+      : blankCall;
+    privateFunc.error = ['all', 'error', true].includes(type)
+      ? printError
+      : blankCall;
+    privateFunc.warn = ['all', 'warn', true].includes(type)
+      ? printWarn
+      : blankCall;
   }
 }
