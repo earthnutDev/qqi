@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "version": "0.0.2",
-  "name": "@qqi/dev",
-  "description": "原 @qqi/dev-log 的 dev 部分",
+  "version": "0.0.0",
+  "name": "@qqi/env",
+  "description": "写点什么吧，空白只本应存在于虚空",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "build": "npm run b && npm run clean:package",
@@ -14,11 +14,5 @@
     "prepublishOnly": "pjj",
     "clean:package": "node scripts/clean-package-json.js"
   },
-  "license": "MIT",
-  "dependencies": {
-    "@qqi/log": "^0.0.1",
-    "a-js-tools": "^1.0.1",
-    "a-type-of-js": "^1.0.2",
-    "color-pen": "^2.0.11"
-  }
+  "license": "MIT"
 }

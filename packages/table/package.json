@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@color-pen/static": "^1.0.0",
-    "a-js-tools": "^1.0.0",
-    "a-type-of-js": "^1.0.1",
-    "color-pen": "^2.0.10"
+    "a-js-tools": "^1.0.1",
+    "a-type-of-js": "^1.0.2",
+    "color-pen": "^2.0.11"
   }
 }
