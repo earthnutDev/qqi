@@ -71,11 +71,11 @@ function Dog(this: DevLog, options?: DogOptions): DevLog {
       get() {
         return type || false;
       },
-      set(type: DevLogType) {
-        const new_type = setType(type);
+      set(value: DevLogType) {
+        const new_type = setType(value);
         if (new_type !== type) {
           type = new_type;
-          managePrint(new_type, _privateFunc, name);
+          managePrint(type, _privateFunc, name);
         }
       },
     },
