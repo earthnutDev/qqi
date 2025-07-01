@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "name": "@qqi/babel-plugin-remove-dog-calls",
   "description": "用于 webpack 使用 babel 时排出 @qqi/dev-log 在浏览器端的使用",
   "scripts": {

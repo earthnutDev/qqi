@@ -29,7 +29,9 @@ export default function (babel: { types: any }) {
           if (
             binding &&
             ['import', 'module'].some(e => binding?.kind === e) &&
-            binding?.path?.parent?.source?.value?.endsWith('/dog') &&
+            (binding?.path?.parent?.source?.value?.endsWith('/dog') ||
+              binding?.path?.parent?.source?.value === 'dog' ||
+              binding?.path?.parent?.source?.value === '@dog') &&
             binding?.identifier?.name === 'dog'
           ) {
             path.remove();
