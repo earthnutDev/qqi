@@ -1,6 +1,8 @@
+import { AssignmentExpression } from './node_modules/@types/estree/index.d';
 export default function (babel: { types: any }) {
   const { types: t } = babel;
-
+  // 允许的值列表
+  const ALLOWED_VALUES = ['all', 'error', 'info', 'warn'];
   return {
     name: 'remove-qqi-dog-calls',
     visitor: {
@@ -9,6 +11,7 @@ export default function (babel: { types: any }) {
         remove: () => void;
         scope: { getBinding: (arg0: any) => any };
       }) {
+        /**  执行方法  */
         const callee = path.get('callee');
 
         if (
@@ -30,6 +33,23 @@ export default function (babel: { types: any }) {
             binding?.identifier?.name === 'dog'
           ) {
             path.remove();
+          }
+        }
+      },
+      AssignmentExpression(path: { parentPath?: any; node?: any }) {
+        const { node } = path;
+
+        if (
+          t.isMemberExpression(node.left) &&
+          t.isIdentifier(node.left.object, { name: 'dog' }) &&
+          t.isIdentifier(node.left.property, { name: 'type' })
+        ) {
+          if (
+            t.isBooleanLiteral(node.right) ||
+            (t.isStringLiteral(node.right) &&
+              ALLOWED_VALUES.includes(node.right.value))
+          ) {
+            path.parentPath.remove();
           }
         }
       },

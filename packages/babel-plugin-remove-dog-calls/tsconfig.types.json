@@ -7,5 +7,12 @@
     "declarationDir": "dist/"
     // "types": ["node"],
   },
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "eg", "jest.setup.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "eg",
+    "jest.setup.ts",
+    "./dog.ts"
+  ]
 }
