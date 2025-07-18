@@ -1,4 +1,3 @@
-import { AssignmentExpression } from './node_modules/@types/estree/index.d';
 export default function (babel: { types: any }) {
   const { types: t } = babel;
   // 允许的值列表

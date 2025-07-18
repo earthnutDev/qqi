@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "name": "@qqi/dev",
   "description": "原 @qqi/dev-log 的 dev 部分",
   "scripts": {
@@ -16,9 +16,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@qqi/log": "^0.0.1",
-    "a-js-tools": "^1.0.1",
-    "a-type-of-js": "^1.0.2",
-    "color-pen": "^2.0.11"
+    "@qqi/log": "^0.1.0",
+    "a-js-tools": "^1.0.8",
+    "a-type-of-js": "^1.0.5",
+    "color-pen": "^2.0.12"
   }
 }

@@ -19,10 +19,10 @@
     "test": "jja cls && rollup --config rollup.config.test.js && node test/out/test/index.mjs"
   },
   "dependencies": {
-    "@qqi/copy-text": "^1.0.3",
-    "@qqi/log": "^0.0.1",
-    "a-node-tools": "^4.2.12",
-    "a-type-of-js": "^1.0.1",
-    "color-pen": "^2.0.10"
+    "@qqi/copy-text": "^1.0.4",
+    "@qqi/log": "^0.1.0",
+    "a-node-tools": "^4.2.15",
+    "a-type-of-js": "^1.0.5",
+    "color-pen": "^2.0.12"
   }
 }
