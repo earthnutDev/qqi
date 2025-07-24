@@ -100,4 +100,4 @@ await dev('测试异步的代码', async it => {
 
 ## 文档地址
 
-参看 [https://earthnut.dev/qqi/dev](https://earthnut.dev/qqi/dev)
+参看 [https://earthnut.dev/qqi/dev](https://earthnut.dev/npm/qqi/dev)

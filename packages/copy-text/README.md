@@ -22,4 +22,4 @@ await copyTextToClipboard('hello world');
 
 ## 文档
 
-[@qqi/copy-text](https://earthnut.dev/qqi/copy-text)
+[@qqi/copy-text](https://earthnut.dev/npm/qqi/copy-text)

@@ -8,12 +8,12 @@
   "scripts": {
     "build": "jja rm dist && rollup --config rollup.config.js && node ./scripts/clean-package-json.js",
     "diff": "jja package --diff",
-    "dev": "jja rm dist && npm run build && chmod +x dev.sh && ./dev.sh",
+    "dev": "jja rm dist && pnpm run build && chmod +x dev.sh && ./dev.sh",
     "eslint": "jja cls && eslint src",
-    "beautify": "npm run prettier",
+    "beautify": "pnpm run prettier",
     "prettier": "jja cls && prettier . --write",
     "vjj": "vjj",
-    "test": "jja cls &&  npm run build && node dist/bin.mjs"
+    "test": "jja cls &&  pnpm run build && node dist/bin.mjs"
   },
   "dependencies": {
     "a-command": "^2.3.13",

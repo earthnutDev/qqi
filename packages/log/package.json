@@ -5,7 +5,7 @@
   "description": "原 @qqi/dev-log 中的 log 部分",
   "scripts": {
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
-    "build": "npm run b && npm run clean:package",
+    "build": "pnpm run b && pnpm run clean:package",
     "test": "jja rm .eg && rollup --config rollup.config.eg.js && node .eg/index.mjs",
     "push:version": "gvv",
     "push": "gvv",
