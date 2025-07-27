@@ -34,4 +34,4 @@ a_node_tools_dev=true npm run dev
 
 ## 文档地址
 
-参看 [https://earthnut.dev/qqi/log](https://earthnut.dev/qqi/log)
+参看 [https://earthnut.dev/npm/qqi/log](https://earthnut.dev/npm/qqi/log)

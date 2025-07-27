@@ -47,7 +47,7 @@ packageJson = {
     node: '>=18.0.0',
   },
   keywords: ['log', 'qqi', 'earthnut'],
-  homepage: 'https://earthnut.dev',
+  homepage: 'https://earthnut.dev/npm/qqi/log',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',
