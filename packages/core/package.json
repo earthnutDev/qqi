@@ -1,7 +1,7 @@
 {
   "name": "qqi",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "简单的文件读写",
   "license": "MIT",
   "scripts": {
@@ -12,14 +12,16 @@
     "eslint": "jja cls && eslint src",
     "beautify": "pnpm run prettier",
     "prettier": "jja cls && prettier . --write",
-    "vjj": "vjj",
+    "push": "gvv",
+    "push:version": "gvv",
+    "vjj": "vjj -d",
     "dev": "rollup --config rollup.config.eg.js && node .eg/index.mjs"
   },
   "dependencies": {
-    "@color-pen/static": "^1.0.0",
-    "@qqi/log": "^0.1.0",
-    "a-node-tools": "^4.2.16",
-    "a-type-of-js": "^1.0.5",
-    "color-pen": "^2.0.12"
+    "@color-pen/static": "^1.0.1",
+    "@qqi/log": "^0.1.1",
+    "a-node-tools": "^4.2.18",
+    "a-type-of-js": "^1.0.7",
+    "color-pen": "^2.0.13"
   }
 }

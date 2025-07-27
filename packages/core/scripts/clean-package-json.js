@@ -32,7 +32,7 @@ packageJson = {
     },
   },
   keywords: ['qqi'],
-  homepage: 'https://earthnut.dev/qqi/core',
+  homepage: 'https://earthnut.dev/npm/qqi/core',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',

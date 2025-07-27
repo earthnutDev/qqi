@@ -51,4 +51,4 @@ qqi.write('test', { a: 10 });
 
 ## 文档地址
 
-[qqi](https://earthnut.dev/qqi)
+[qqi](https://earthnut.dev/npm/qqi/core)
