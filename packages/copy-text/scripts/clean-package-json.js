@@ -32,7 +32,7 @@ packageJson = {
     },
   },
   keywords: ['@qqi/copy-text', '@qqi'],
-  homepage: 'https://earthnut.dev/qqi/copy-text',
+  homepage: 'https://earthnut.dev/npm/qqi/copy-text',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',

@@ -20,7 +20,7 @@ packageJson = {
   },
   files: ['bin.mjs'],
   keywords: ['@qqi/check-version', '@qqi'],
-  homepage: 'https://earthnut.dev/qqi/check-version',
+  homepage: 'https://earthnut.dev/npm/qqi/check-version',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',

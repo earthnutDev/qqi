@@ -32,7 +32,7 @@ packageJson = {
     },
   },
   keywords: ['@qqi/rollup-external', '@qqi'],
-  homepage: 'https://earthnut.dev/qqi/rollup-external',
+  homepage: 'https://earthnut.dev/npm/qqi/rollup-external',
   bugs: {
     url: 'https://github.com/earthnutDev/qqi/issues',
     email: 'earthnut.dev@outlook.com',

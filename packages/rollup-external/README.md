@@ -45,4 +45,4 @@ export default {
 
 ## 文档地址
 
-[@qqi/rollup-external](https://earthnut.dev/qqi/rollup-external)
+[@qqi/rollup-external](https://earthnut.dev/npm/qqi/rollup-external)

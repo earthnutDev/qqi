@@ -39,4 +39,4 @@ export default function (api) {
 
 ## 文档地址
 
-参看 [https://earthnut.dev/npm/qqi/babel-plugin-remove-dog-calls](https://earthnut.dev/npm/qqi/babel-plugin-remove-dog-calls)
+参看 [https://earthnut.dev/npm/qqi/remove-dog](https://earthnut.dev/npm/qqi/remove-dog)

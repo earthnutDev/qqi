@@ -20,7 +20,7 @@
   "dependencies": {
     "@color-pen/static": "^1.0.1",
     "@qqi/log": "^0.1.1",
-    "a-node-tools": "^4.2.18",
+    "a-node-tools": "^4.2.19",
     "a-type-of-js": "^1.0.7",
     "color-pen": "^2.0.13"
   }
