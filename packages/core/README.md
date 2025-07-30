@@ -49,6 +49,18 @@ const qqi = new QQI('test');
 qqi.write('test', { a: 10 });
 ```
 
+### 获取某文件的完整路径
+
+```ts
+import { QQI } from 'qqi';
+
+// 同上
+const qqi = new QQI('test');
+
+// 返回 `~/.earthnut.dev.data/test/test`
+console.log(qqi.getPath('test'));
+```
+
 ## 文档地址
 
 [qqi](https://earthnut.dev/npm/qqi/core)

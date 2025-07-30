@@ -86,4 +86,8 @@ export class QQI {
     dog('写入反馈', result);
     return result;
   }
+  /**  获取文件路径   */
+  getPath(fileName: string) {
+    return pathJoin(this.#filename, fileName);
+  }
 }
