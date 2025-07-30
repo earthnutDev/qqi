@@ -91,7 +91,7 @@ jobs:
         if: github.event_name == 'push'
         id: detect-changes
         run: |
-          ls -al packages/dev-log/src/dev
+          # ls -al packages/dev-log/src/dev
           ./scripts/detect_changes.sh
 
       - name: 检测子包变更情况（手动触发时触发）

@@ -9,7 +9,7 @@
     "beautify": "pnpm run eslint && pnpm run prettier",
     "prettier": "jja cls && prettier . --write",
     "push:version": "gvv",
-    "gvv": "gvv",
+    "push": "gvv",
     "prepublishOnly": "pjj"
   },
   "devDependencies": {
