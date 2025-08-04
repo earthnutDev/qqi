@@ -1,5 +1,11 @@
 # 更新日志 📔
 
+## v0.1.2-rc.0 (2025-8-4)
+
+该版本不发布更新
+
+- 在 webpack 为打包的环境下，会将 `dog(...[1, 2, 3])` 这种写法转化为 `dog.apply(void 0, _toConsumableArray([1 ,2 ,3]))` 而由于原型链尽毁不复，只能单独设置（现通过更新上游的 [a-js-tools](https://www.npmjs.com/package/a-js-tools) 解决所有的问题）
+
 ## v0.1.1 (2025-7-27)
 
 - 整理文档

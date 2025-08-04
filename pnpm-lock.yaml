@@ -72,8 +72,8 @@ importers:
         specifier: ^2.3.17
         version: 2.3.17
       lint-staged:
-        specifier: ^16.1.2
-        version: 16.1.2
+        specifier: ^16.1.4
+        version: 16.1.4
       pjj:
         specifier: ^1.0.4
         version: 1.0.4
@@ -151,10 +151,10 @@ importers:
     dependencies:
       a-command:
         specifier: ^2.3.13
-        version: 2.3.13
+        version: 2.3.15
       a-js-tools:
         specifier: ^1.0.10
-        version: 1.0.10
+        version: 1.0.12
       a-node-tools:
         specifier: ^4.2.19
         version: 4.2.19
@@ -166,22 +166,22 @@ importers:
     dependencies:
       a-command:
         specifier: ^2.3.7
-        version: 2.3.13
+        version: 2.3.15
       a-js-tools:
         specifier: ^1.0.0
-        version: 1.0.9
+        version: 1.0.12
       a-node-tools:
         specifier: ^4.2.6
-        version: 4.2.16
+        version: 4.2.19
       a-type-of-js:
         specifier: ^1.0.1
-        version: 1.0.5
+        version: 1.0.7
 
   packages/copy-text:
     dependencies:
       a-js-tools:
         specifier: ^1.0.10
-        version: 1.0.10
+        version: 1.0.12
       a-node-tools:
         specifier: ^4.2.19
         version: 4.2.19
@@ -190,10 +190,10 @@ importers:
     dependencies:
       a-js-tools:
         specifier: ^1.0.0
-        version: 1.0.9
+        version: 1.0.12
       a-node-tools:
         specifier: ^4.2.5
-        version: 4.2.16
+        version: 4.2.19
 
   packages/core:
     dependencies:
@@ -217,19 +217,19 @@ importers:
     dependencies:
       '@color-pen/static':
         specifier: ^1.0.0
-        version: 1.0.0
+        version: 1.0.1
       '@qqi/log':
         specifier: ^0.0.1
         version: 0.0.1
       a-node-tools:
         specifier: ^4.2.12
-        version: 4.2.16
+        version: 4.2.19
       a-type-of-js:
         specifier: ^1.0.0
-        version: 1.0.5
+        version: 1.0.7
       color-pen:
         specifier: ^2.0.10
-        version: 2.0.12
+        version: 2.0.13
 
   packages/dev:
     dependencies:
@@ -238,43 +238,13 @@ importers:
         version: 0.1.1
       a-js-tools:
         specifier: ^1.0.10
-        version: 1.0.10
+        version: 1.0.12
       a-type-of-js:
         specifier: ^1.0.7
         version: 1.0.7
       color-pen:
         specifier: ^2.0.13
         version: 2.0.13
-
-  packages/dev-log:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.0
-        version: 1.0.0
-      a-js-tools:
-        specifier: ^1.0.1
-        version: 1.0.9
-      a-type-of-js:
-        specifier: ^1.0.2
-        version: 1.0.5
-      color-pen:
-        specifier: ^2.0.11
-        version: 2.0.12
-
-  packages/dev-log/dist:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.0
-        version: 1.0.0
-      a-js-tools:
-        specifier: ^1.0.0
-        version: 1.0.9
-      a-type-of-js:
-        specifier: ^1.0.0
-        version: 1.0.5
-      color-pen:
-        specifier: ^2.0.10
-        version: 2.0.12
 
   packages/dev/dist:
     dependencies:
@@ -283,13 +253,13 @@ importers:
         version: 0.0.0
       a-js-tools:
         specifier: ^1.0.1
-        version: 1.0.9
+        version: 1.0.12
       a-type-of-js:
         specifier: ^1.0.2
-        version: 1.0.5
+        version: 1.0.7
       color-pen:
         specifier: ^2.0.11
-        version: 2.0.12
+        version: 2.0.13
 
   packages/env: {}
 
@@ -299,8 +269,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       a-js-tools:
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.0.12
+        version: 1.0.12
       a-type-of-js:
         specifier: ^1.0.7
         version: 1.0.7
@@ -315,7 +285,7 @@ importers:
         version: 1.0.1
       a-js-tools:
         specifier: ^1.0.10
-        version: 1.0.10
+        version: 1.0.12
       a-type-of-js:
         specifier: ^1.0.7
         version: 1.0.7
@@ -327,7 +297,7 @@ importers:
     dependencies:
       '@qqi/copy-text':
         specifier: ^1.0.5
-        version: 1.0.5
+        version: 1.0.6
       '@qqi/log':
         specifier: ^0.1.1
         version: 0.1.1
@@ -345,49 +315,19 @@ importers:
     dependencies:
       '@qqi/copy-text':
         specifier: ^1.0.3
-        version: 1.0.5
+        version: 1.0.6
       '@qqi/log':
         specifier: ^0.0.0
         version: 0.0.0
       a-node-tools:
         specifier: ^4.2.6
-        version: 4.2.16
+        version: 4.2.19
       a-type-of-js:
         specifier: ^1.0.1
-        version: 1.0.5
+        version: 1.0.7
       color-pen:
         specifier: ^2.0.10
-        version: 2.0.12
-
-  packages/table:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.0
-        version: 1.0.0
-      a-js-tools:
-        specifier: ^1.0.8
-        version: 1.0.9
-      a-type-of-js:
-        specifier: ^1.0.5
-        version: 1.0.5
-      color-pen:
-        specifier: ^2.0.12
-        version: 2.0.12
-
-  packages/table/dist:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.0
-        version: 1.0.0
-      a-js-tools:
-        specifier: ^1.0.0
-        version: 1.0.9
-      a-type-of-js:
-        specifier: ^1.0.1
-        version: 1.0.5
-      color-pen:
-        specifier: ^2.0.10
-        version: 2.0.12
+        version: 2.0.13
 
 packages:
 
@@ -920,10 +860,6 @@ packages:
     resolution: {integrity: sha512-ruv7Ae4J5dUYULmeXw1gmb7rYRz57OWCPM57pHojnLq/3Z1CK2lNSLTCVjxVk1F/TZHwOZZrOWi0ur95BbLxNQ==}
     engines: {node: '>=6.9.0'}
 
-  '@color-pen/static@1.0.0':
-    resolution: {integrity: sha512-iHgpdpOwLNMiPF/OrBH3O1Dic/bUZ2Sm6rApSCIR+gcY5oYkIY5iZQ2jRgG/9xv5ozA3hJf9pEeBBM5CmLfjTg==}
-    engines: {node: '>=12.0.0'}
-
   '@color-pen/static@1.0.1':
     resolution: {integrity: sha512-dV1nK4MyNsc9uR3vOLeDPvMXV6yOkd+Wmrc00xGjjHpAAj1k1Gb4lmWMMwn4vkkwc1TatexbJDTbbFwu54376g==}
     engines: {node: '>=12.0.0'}
@@ -1037,9 +973,6 @@ packages:
   '@qqi/check-version@1.0.5':
     resolution: {integrity: sha512-uLf1mfZR6KuG1EIpqnWqv29wftAbguzILMSWboudASggU8Em42WrfS8/H6BKddBioDUASh0KGjEr0rvJzL5a+g==}
     hasBin: true
-
-  '@qqi/copy-text@1.0.5':
-    resolution: {integrity: sha512-FKsp2C6D3RCmedzFeAudamKMuxF+KCUPc5ORHiBwRU/Cbs0QFmh62EzGCT3O5bApYhlof/Tqhs6x77v0XW/ecg==}
 
   '@qqi/copy-text@1.0.6':
     resolution: {integrity: sha512-WeGf3NlJls6bEtxa5stoJIHuPMcQ826ReObeWh2vIfhfRrE+mUAHvqhKASXT2po8aYSrkOZ6OixSn770xCvaOg==}
@@ -1401,32 +1334,17 @@ packages:
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  a-command@2.3.13:
-    resolution: {integrity: sha512-4XGmXqjl9RxViWKibEFtx3VuoCyFmfyY+Ix1qIXxC+uMEdMkg99x0vayWFiLDB5zXST325tkIfvju/FOqaijmQ==}
-    hasBin: true
-
   a-command@2.3.15:
     resolution: {integrity: sha512-wYY8W1y+Gl+f7qzE8J00LeFyVYCXmUm5uxShA6ICiiutLqFYrr9yAoX4j6RLR42rP3RQCH9NLy6Mt0CE1lXqHQ==}
     hasBin: true
 
-  a-js-tools@1.0.10:
-    resolution: {integrity: sha512-axdivxCVdjn3yjx7XsTHR9BT8/F2tgtyIYGzMciVR9Lz0xLDdAdfyXwLWcSr08DNbZZWPquJf9RSYHLR+sS2oQ==}
+  a-js-tools@1.0.12:
+    resolution: {integrity: sha512-D32I7JxOIsZNfm/VU17uqyzMqBTs1EZS46uPrttYMmecD+QNfQ2OIySd6abNNPMzKGN6KQTKYR9sWtdfLIl/Rw==}
     engines: {node: '>=15.0.0'}
-
-  a-js-tools@1.0.9:
-    resolution: {integrity: sha512-iPV6VATc12iaruG8H6LgDfyBMVe+pp3Ipdu0aon5QYUypbT1y1N6ZLekK4KiCtt5SX64u7H89JiRNZvYYZ4NaA==}
-    engines: {node: '>=15.0.0'}
-
-  a-node-tools@4.2.16:
-    resolution: {integrity: sha512-o79FqAOpuQmRVt21MMqwIvlee0+OoP+jWbDDJaFcxVPCLnUZy4uQ+XOam3rHwibcDaxNpTV+6jvI793mfOM9eQ==}
-    engines: {node: '>=18.0.0'}
 
   a-node-tools@4.2.19:
     resolution: {integrity: sha512-cdKNmbx41z6O7rMDg+R6v0e5BV+PfstFg6jiKPIQ+FaZpgg+Oy0JL6b0OWG701UY+5cIgDppJE+600xh+lwTiQ==}
     engines: {node: '>=18.0.0'}
-
-  a-type-of-js@1.0.5:
-    resolution: {integrity: sha512-juid2xBG8CGAfUOR+Mm8YtueQJUfFRCba/2mu2YFXICq3oqa8pNey+vwmWF2jXIrCbIKCNQzolsxIPPrdPMK+Q==}
 
   a-type-of-js@1.0.7:
     resolution: {integrity: sha512-O7pkkRHQii4xt4Po+7N7mVk7xm9APzv6PZdgErSFBuRDSUrHZu5T6TYmFE24/WTR+m4lerbtXBbQfWjRmGyusQ==}
@@ -1564,8 +1482,8 @@ packages:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
 
-  chalk@5.4.1:
-    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
+  chalk@5.5.0:
+    resolution: {integrity: sha512-1tm8DTaJhPBG3bIkVeZt1iZM9GfSX2lzOeDVZH9R9ffRHpmHvxZ/QhgQH/aDTkswQVt+YHdXAdS/In/30OjCbg==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   chrome-trace-event@1.0.4:
@@ -1596,10 +1514,6 @@ packages:
 
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
-
-  color-pen@2.0.12:
-    resolution: {integrity: sha512-yAeIhIBMs0dM3qvSwRtUtaiEUccEK5zrdqHbth13318iUx4ArzH/P6NVTyu9E8n6RrXnW69ceopEg1pR8giPEg==}
-    engines: {node: '>=12.0.0'}
 
   color-pen@2.0.13:
     resolution: {integrity: sha512-cTO70qy4KmwVJcQ/YAK+8vHcceBTAJ5NRa7SOu+KOfDS9quEUJRgFAeme0I2ekGIBSsDwZQQKMFSZ/WSHlYszg==}
@@ -1666,8 +1580,8 @@ packages:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
 
-  electron-to-chromium@1.5.192:
-    resolution: {integrity: sha512-rP8Ez0w7UNw/9j5eSXCe10o1g/8B1P5SM90PCCMVkIRQn2R0LEHWz4Eh9RnxkniuDe1W0cTSOB3MLlkTGDcuCg==}
+  electron-to-chromium@1.5.194:
+    resolution: {integrity: sha512-SdnWJwSUot04UR51I2oPD8kuP2VI37/CADR1OHsFOUzZIvfWJBO6q11k5P/uKNyTT3cdOsnyjkrZ+DDShqYqJA==}
 
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
@@ -2073,14 +1987,14 @@ packages:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
-  lint-staged@16.1.2:
-    resolution: {integrity: sha512-sQKw2Si2g9KUZNY3XNvRuDq4UJqpHwF0/FQzZR2M7I5MvtpWvibikCjUVJzZdGE0ByurEl3KQNvsGetd1ty1/Q==}
+  lint-staged@16.1.4:
+    resolution: {integrity: sha512-xy7rnzQrhTVGKMpv6+bmIA3C0yET31x8OhKBYfvGo0/byeZ6E0BjGARrir3Kg/RhhYHutpsi01+2J5IpfVoueA==}
     engines: {node: '>=20.17'}
     hasBin: true
 
-  listr2@8.3.3:
-    resolution: {integrity: sha512-LWzX2KsqcB1wqQ4AHgYb4RsDXauQiqhjLk+6hjbaeHG4zpjjVAB6wC/gz6X0l+Du1cN3pUB5ZlrvTbhGSNnUQQ==}
-    engines: {node: '>=18.0.0'}
+  listr2@9.0.1:
+    resolution: {integrity: sha512-SL0JY3DaxylDuo/MecFeiC+7pedM0zia33zl0vcjgwcq1q1FWWF1To9EIauPbl8GbMCU0R2e0uJ8bZunhYKD2g==}
+    engines: {node: '>=20.0.0'}
 
   loader-runner@4.3.0:
     resolution: {integrity: sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg==}
@@ -3350,8 +3264,6 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@color-pen/static@1.0.0': {}
-
   '@color-pen/static@1.0.1': {}
 
   '@discoveryjs/json-ext@0.6.3': {}
@@ -3463,45 +3375,40 @@ snapshots:
   '@qqi/check-version@1.0.5':
     dependencies:
       a-command: 2.3.15
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
 
-  '@qqi/copy-text@1.0.5':
-    dependencies:
-      a-js-tools: 1.0.10
-      a-node-tools: 4.2.19
-
   '@qqi/copy-text@1.0.6':
     dependencies:
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
 
   '@qqi/log@0.0.0':
     dependencies:
       '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.9
-      a-type-of-js: 1.0.5
-      color-pen: 2.0.12
+      a-js-tools: 1.0.12
+      a-type-of-js: 1.0.7
+      color-pen: 2.0.13
 
   '@qqi/log@0.0.1':
     dependencies:
-      '@color-pen/static': 1.0.0
-      a-js-tools: 1.0.10
-      a-type-of-js: 1.0.5
-      color-pen: 2.0.12
+      '@color-pen/static': 1.0.1
+      a-js-tools: 1.0.12
+      a-type-of-js: 1.0.7
+      color-pen: 2.0.13
 
   '@qqi/log@0.0.2':
     dependencies:
       '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
   '@qqi/log@0.1.1':
     dependencies:
       '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -3859,49 +3766,26 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  a-command@2.3.13:
-    dependencies:
-      '@color-pen/static': 1.0.1
-      '@qqi/log': 0.1.1
-      a-js-tools: 1.0.10
-      a-node-tools: 4.2.19
-      a-type-of-js: 1.0.7
-      color-pen: 2.0.13
-
   a-command@2.3.15:
     dependencies:
       '@color-pen/static': 1.0.1
       '@qqi/log': 0.1.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
-  a-js-tools@1.0.10:
+  a-js-tools@1.0.12:
     dependencies:
       a-type-of-js: 1.0.7
-
-  a-js-tools@1.0.9:
-    dependencies:
-      a-type-of-js: 1.0.5
-
-  a-node-tools@4.2.16:
-    dependencies:
-      '@color-pen/static': 1.0.1
-      '@qqi/log': 0.1.1
-      a-js-tools: 1.0.9
-      a-type-of-js: 1.0.5
-      color-pen: 2.0.13
 
   a-node-tools@4.2.19:
     dependencies:
       '@color-pen/static': 1.0.1
       '@qqi/log': 0.1.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
-
-  a-type-of-js@1.0.5: {}
 
   a-type-of-js@1.0.7: {}
 
@@ -4018,7 +3902,7 @@ snapshots:
   browserslist@4.25.1:
     dependencies:
       caniuse-lite: 1.0.30001731
-      electron-to-chromium: 1.5.192
+      electron-to-chromium: 1.5.194
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
@@ -4033,7 +3917,7 @@ snapshots:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  chalk@5.4.1: {}
+  chalk@5.5.0: {}
 
   chrome-trace-event@1.0.4: {}
 
@@ -4069,22 +3953,16 @@ snapshots:
 
   color-name@1.1.4: {}
 
-  color-pen@2.0.12:
-    dependencies:
-      '@color-pen/static': 1.0.0
-      a-js-tools: 1.0.10
-      a-type-of-js: 1.0.5
-
   color-pen@2.0.13:
     dependencies:
       '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-type-of-js: 1.0.7
 
   colored-table@0.1.0:
     dependencies:
       '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
 
@@ -4128,7 +4006,7 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
-  electron-to-chromium@1.5.192: {}
+  electron-to-chromium@1.5.194: {}
 
   emoji-regex@10.4.0: {}
 
@@ -4367,7 +4245,7 @@ snapshots:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.15
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
@@ -4470,7 +4348,7 @@ snapshots:
       '@qqi/copy-text': 1.0.6
       '@qqi/log': 0.1.1
       a-command: 2.3.15
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
@@ -4528,13 +4406,13 @@ snapshots:
 
   lilconfig@3.1.3: {}
 
-  lint-staged@16.1.2:
+  lint-staged@16.1.4:
     dependencies:
-      chalk: 5.4.1
+      chalk: 5.5.0
       commander: 14.0.0
       debug: 4.4.1
       lilconfig: 3.1.3
-      listr2: 8.3.3
+      listr2: 9.0.1
       micromatch: 4.0.8
       nano-spawn: 1.0.2
       pidtree: 0.6.0
@@ -4543,7 +4421,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  listr2@8.3.3:
+  listr2@9.0.1:
     dependencies:
       cli-truncate: 4.0.0
       colorette: 2.0.20
@@ -4698,7 +4576,7 @@ snapshots:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.15
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
@@ -5007,7 +4885,7 @@ snapshots:
     dependencies:
       '@qqi/log': 0.1.1
       a-command: 2.3.15
-      a-js-tools: 1.0.10
+      a-js-tools: 1.0.12
       a-node-tools: 4.2.19
       a-type-of-js: 1.0.7
       color-pen: 2.0.13
