@@ -1,7 +1,7 @@
 {
   "name": "@qqi/rollup-external",
   "type": "module",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "用于 rollup 打包 📦 时排除异己的工具 🔧",
   "license": "MIT",
   "scripts": {
@@ -15,11 +15,11 @@
     "vjj": "vjj",
     "push:version": "gvv",
     "push": "gvv",
-    "dev": "rollup --config rollup.config.eg.js && node .eg/index.mjs",
-    "test": "jja cls && rollup --config rollup.config.test.js && node test/out/test/index.mjs"
+    "dev": "pnpm test",
+    "test": "jja cls rm .eg && pnpm tsc  && jja run qqi_rollup_external_dev=false  rollup --config rollup.config.eg.js"
   },
   "dependencies": {
-    "@qqi/copy-text": "^1.0.5",
+    "@qqi/copy-text": "^1.0.7",
     "@qqi/log": "^0.1.1",
     "a-node-tools": "^4.2.19",
     "a-type-of-js": "^1.0.7",

@@ -3,9 +3,10 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import cleanup from 'rollup-plugin-cleanup';
+import { external } from './.eg/index.js';
 
 export default {
-  input: './eg/index.ts',
+  input: 'eg/index.ts',
   output: [
     {
       format: 'es',
@@ -16,6 +17,9 @@ export default {
       dir: '.eg/',
     },
   ],
+  external: external({
+    include: ['eg/index.ts'],
+  }),
   plugins: [
     resolve(),
     commonjs(),

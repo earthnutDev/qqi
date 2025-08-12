@@ -12,9 +12,11 @@ import {
 import {
   _p,
   getDirectoryBy,
+  isWindows,
   PackageJson,
   pathJoin,
   readFileToJsonSync,
+  fileExist,
 } from 'a-node-tools';
 import { bgRedPen, hexPen } from 'color-pen';
 import { copyTextToClipboard } from '@qqi/copy-text';
@@ -60,20 +62,21 @@ export function external(options?: {
     return () => true;
   }
   if (isUndefined(options.exclude)) options.exclude = [];
-  if (isString(options.exclude)) options.exclude = [options.exclude];
+  if (typeof options.exclude === 'string')
+    options.exclude = [options.exclude.toString()];
   options.exclude?.forEach((e, i, a) => {
     if (!isString(e)) a[i] = '';
   });
   options.exclude = options.exclude?.filter(e => !isBusinessEmptyString(e));
   dog('处理完 exclude 的参数', options);
   if (isUndefined(options.ignore)) options.ignore = [];
-  if (isString(options.ignore)) options.ignore = [options.ignore];
+  if (typeof options.ignore === 'string') options.ignore = [options.ignore];
   options.ignore?.forEach((e, i, a) => {
     if (!isString(e)) a[i] = '';
   });
   options.ignore = options.ignore?.filter(e => !isBusinessEmptyString(e));
   if (isUndefined(options.include)) options.include = [];
-  if (isString(options.include)) options.include = [options.include];
+  if (typeof options.include === 'string') options.include = [options.include];
   options.include?.forEach((e, i, a) => {
     if (!isString(e)) a[i] = '';
   });
@@ -81,6 +84,8 @@ export function external(options?: {
   dog('处理完的参数', options);
 
   const { exclude, ignore, include } = options;
+
+  dog('当前的工作路径', process.cwd());
 
   const packageDir = getDirectoryBy('package.json', 'file');
 
@@ -111,8 +116,18 @@ export function external(options?: {
   // const includedPkg = isUndefined(include) || !isArray(include) ? [] : include;
 
   return (id: string) => {
-    // 包存在于 included 中，直接交给 rollup 处理
-    if (include.includes(id)) return false;
+    dog('本次检测的 id', id);
+    const cwd = process.cwd();
+    dog('当前执行的路径', cwd);
+    dog('当前提供的 id 是否为文件', fileExist(pathJoin(cwd, id)));
+    if (id.startsWith(cwd) || fileExist(pathJoin(cwd, id))) {
+      dog('由于是本地文件本次跳过');
+      return false;
+    }
+
+    if (include.includes(id))
+      // 包存在于 included 中，直接交给 rollup 处理
+      return false;
     // 重制识别位置
     excludedRegExp.lastIndex = 0;
     /**  是否在设定排除之外（包含要忽略的包）  */
@@ -139,5 +154,6 @@ export function external(options?: {
 
 /**  复制  */
 function copy(str: string) {
+  str = isWindows ? str.replace(/[\\]/gm, '\\\\') : str;
   return copyTextToClipboard(str) === str ? hexPen('#666')`已复制` : '';
 }
