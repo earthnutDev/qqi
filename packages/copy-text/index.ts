@@ -10,23 +10,32 @@ import { execSync } from 'node:child_process';
  *
  */
 export function copyTextToClipboard(str: string) {
-  if (!isNode()) {
-    throw new TypeError('该函数不支持当前环境');
-  }
+  if (!isNode()) throw new TypeError('该函数不支持当前环境');
+
   const currentOs = process.platform;
 
   const input = str.replace(/\s+$/, '');
 
-  if (currentOs === 'darwin') {
-    execSync('pbcopy', { input });
-    return str;
-  } else if (currentOs === 'win32') {
-    const base64 = Buffer.from(input).toString('base64');
-    execSync(`powershell -sta -noni -NoProfile -EncodedCommand ${base64}`, {
-      stdio: 'ignore',
+  if (currentOs === 'darwin') execSync('pbcopy', { input });
+  else if (currentOs === 'win32')
+    execSync('clip', {
+      input: input,
+      stdio: 'pipe',
     });
-    return str;
-  } else {
-    return '';
+  else {
+    try {
+      execSync('which xclip', { stdio: 'ignore' });
+      execSync('xclip -selection clipboard', { input });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      try {
+        execSync('which xsel', { stdio: 'ignore' });
+        execSync('xsel --clipboard --input', { input });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        return '';
+      }
+    }
   }
+  return str;
 }

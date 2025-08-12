@@ -141,12 +141,6 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1(webpack@5.101.0)
 
-  packages/babel-plugin-remove-dog-calls/dist:
-    dependencies:
-      '@qqi/babel-plugin-remove-dog-calls':
-        specifier: ^0.0.2
-        version: 0.0.2
-
   packages/check-version:
     dependencies:
       a-command:
@@ -162,21 +156,6 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7
 
-  packages/check-version/dist:
-    dependencies:
-      a-command:
-        specifier: ^2.3.7
-        version: 2.3.15
-      a-js-tools:
-        specifier: ^1.0.0
-        version: 1.0.12
-      a-node-tools:
-        specifier: ^4.2.6
-        version: 4.2.19
-      a-type-of-js:
-        specifier: ^1.0.1
-        version: 1.0.7
-
   packages/copy-text:
     dependencies:
       a-js-tools:
@@ -184,15 +163,6 @@ importers:
         version: 1.0.12
       a-node-tools:
         specifier: ^4.2.19
-        version: 4.2.19
-
-  packages/copy-text/dist:
-    dependencies:
-      a-js-tools:
-        specifier: ^1.0.0
-        version: 1.0.12
-      a-node-tools:
-        specifier: ^4.2.5
         version: 4.2.19
 
   packages/core:
@@ -213,24 +183,6 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
 
-  packages/core/dist:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.0
-        version: 1.0.1
-      '@qqi/log':
-        specifier: ^0.0.1
-        version: 0.0.1
-      a-node-tools:
-        specifier: ^4.2.12
-        version: 4.2.19
-      a-type-of-js:
-        specifier: ^1.0.0
-        version: 1.0.7
-      color-pen:
-        specifier: ^2.0.10
-        version: 2.0.13
-
   packages/dev:
     dependencies:
       '@qqi/log':
@@ -246,21 +198,6 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
 
-  packages/dev/dist:
-    dependencies:
-      '@qqi/log':
-        specifier: ^0.0.0
-        version: 0.0.0
-      a-js-tools:
-        specifier: ^1.0.1
-        version: 1.0.12
-      a-type-of-js:
-        specifier: ^1.0.2
-        version: 1.0.7
-      color-pen:
-        specifier: ^2.0.11
-        version: 2.0.13
-
   packages/env: {}
 
   packages/log:
@@ -270,21 +207,6 @@ importers:
         version: 1.0.1
       a-js-tools:
         specifier: ^1.0.12
-        version: 1.0.12
-      a-type-of-js:
-        specifier: ^1.0.7
-        version: 1.0.7
-      color-pen:
-        specifier: ^2.0.13
-        version: 2.0.13
-
-  packages/log/dist:
-    dependencies:
-      '@color-pen/static':
-        specifier: ^1.0.1
-        version: 1.0.1
-      a-js-tools:
-        specifier: ^1.0.10
         version: 1.0.12
       a-type-of-js:
         specifier: ^1.0.7
@@ -309,24 +231,6 @@ importers:
         version: 1.0.7
       color-pen:
         specifier: ^2.0.13
-        version: 2.0.13
-
-  packages/rollup-external/dist:
-    dependencies:
-      '@qqi/copy-text':
-        specifier: ^1.0.3
-        version: 1.0.6
-      '@qqi/log':
-        specifier: ^0.0.0
-        version: 0.0.0
-      a-node-tools:
-        specifier: ^4.2.6
-        version: 4.2.19
-      a-type-of-js:
-        specifier: ^1.0.1
-        version: 1.0.7
-      color-pen:
-        specifier: ^2.0.10
         version: 2.0.13
 
 packages:
@@ -966,24 +870,12 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@qqi/babel-plugin-remove-dog-calls@0.0.2':
-    resolution: {integrity: sha512-TemK68PzFVLWhldgqsrHn7lGDennt9seRFjW3u87RP2jxNmQI0MuC6q6MPB6h8VeyQNWU/h6CuJpHAxdmTGi9A==}
-    engines: {node: '>=18.0.0'}
-
   '@qqi/check-version@1.0.5':
     resolution: {integrity: sha512-uLf1mfZR6KuG1EIpqnWqv29wftAbguzILMSWboudASggU8Em42WrfS8/H6BKddBioDUASh0KGjEr0rvJzL5a+g==}
     hasBin: true
 
   '@qqi/copy-text@1.0.6':
     resolution: {integrity: sha512-WeGf3NlJls6bEtxa5stoJIHuPMcQ826ReObeWh2vIfhfRrE+mUAHvqhKASXT2po8aYSrkOZ6OixSn770xCvaOg==}
-
-  '@qqi/log@0.0.0':
-    resolution: {integrity: sha512-ZvEvGSd5mYKW+TZKlRZQrNIuY0wMAm8E8oSRUrQZndxjGZrhglcFF5GXe4fFF5rBK7jZ9irTeo2lpLw4HPysvA==}
-    engines: {node: '>=18.0.0'}
-
-  '@qqi/log@0.0.1':
-    resolution: {integrity: sha512-/hheU/cC0tUtJtgt7Wdni2rEIFIeT4+rGfWvKa5zjHvinAJfHZXxa4KRqnz2OZsuh6Goie+manPM4qUeip9bVw==}
-    engines: {node: '>=18.0.0'}
 
   '@qqi/log@0.0.2':
     resolution: {integrity: sha512-1gsPUuW74oQP/2hWjUHdxPStQ+m/i1aUnMSUWKSQqZPetAcdxKEe0UChgzwMdtAXe9RFTxrR4zyPs1juU/1qEg==}
@@ -3370,8 +3262,6 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@qqi/babel-plugin-remove-dog-calls@0.0.2': {}
-
   '@qqi/check-version@1.0.5':
     dependencies:
       a-command: 2.3.15
@@ -3383,20 +3273,6 @@ snapshots:
     dependencies:
       a-js-tools: 1.0.12
       a-node-tools: 4.2.19
-
-  '@qqi/log@0.0.0':
-    dependencies:
-      '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.12
-      a-type-of-js: 1.0.7
-      color-pen: 2.0.13
-
-  '@qqi/log@0.0.1':
-    dependencies:
-      '@color-pen/static': 1.0.1
-      a-js-tools: 1.0.12
-      a-type-of-js: 1.0.7
-      color-pen: 2.0.13
 
   '@qqi/log@0.0.2':
     dependencies:
